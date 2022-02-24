@@ -2,12 +2,26 @@ from django.contrib import admin
 from .models import Article, Country, Comment
 from django_summernote.admin import SummernoteModelAdmin
 
+
+@admin.register(Country)
+class CountryAdmin(admin.ModelAdmin):
+    list_display = ('country_name', 'approve_country')
+    search_fields = ['country_name']
+
+
 @admin.register(Article)
 class ArticleAdmin(SummernoteModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
+    list_display = (
+        'title', 'country', 'created_date',
+        'updated_date', 'approved')
     list_filter = ('approved', 'created_date')
-    list_display = ('title', 'country', 'created_date', 'updated_date', 'approved')
     search_fields = ['title', 'content']
     summernote_fields = ('content')
 
-admin.site.register(Country)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('body', 'user_name', 'article', 'created_on', 'approved')
+    list_filter = ('approved', 'created_on')
+    search_fields = ['body', 'article']

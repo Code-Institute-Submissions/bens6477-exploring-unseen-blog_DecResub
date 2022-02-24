@@ -33,7 +33,7 @@ class Article(models.Model):
         User, related_name="article_downvotes", blank=True)
     approved = models.BooleanField(default=False)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    
+
     class Meta:
         ordering = ['-created_date']
 
