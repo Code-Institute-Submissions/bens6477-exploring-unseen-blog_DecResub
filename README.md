@@ -12,3 +12,7 @@ Jira was used to organise the project tasks and timeline. A kanban board was use
 The project board can be viewed [here](https://bens6477.atlassian.net/jira/software/projects/EUB/boards/1).
 
 Epics were refined into User Stories and further split into specific Tasks to complete.
+
+
+## Notes
+The first commit with django integration pushed a secret key to GitHub, however this was resolved immediately in the next commit using the env.py file. This contained sensitive data not to be publicly accessible on GitHub and was withheld using the .gitignore file.
