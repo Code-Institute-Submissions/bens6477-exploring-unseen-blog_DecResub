@@ -8,7 +8,7 @@ Exploring Unseen
     <div class="row">
         <div class="col-12">
             <section class="callout jumbotron text-center">
-                <h1 class="jumbotron-header">Welcome to Exploring Unseen.</h1>
+                <h1 class="jumbotron-header">Exploring Unseen.</h1>
             </section>
         </div>
     </div>
@@ -17,40 +17,36 @@ Exploring Unseen
     </div>
 </div>
 
-<div class="container">
+<div class="container mt-3 mb-3">
     <div class="row">
-        <div class="col-12">
-            <div class="card-deck">
-                <div class="card">
-                    <img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Article Title</h5>
-                        <p class="card-text">Brief outline of the post content. Brief outline of the post content. Brief outline of the post content.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Article Title</h5>
-                        <p class="card-text">Brief outline of the post content. Brief outline of the post content. Brief outline of the post content.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Article Title</h5>
-                        <p class="card-text">Brief outline of the post content. Brief outline of the post content. Brief outline of the post content.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+        <div class="col-12 mt-3 left">
+            <h2>Welcome to Exploring Unseen</h2>
+            <p>Introduction to home page, articles etc.</p>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 mt-3 left">
+            <div class="row">
+            {% for article in article_list %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text">{{ article.summary }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Updated on {{ article.updated_date }}</small>
+                        </div>
                     </div>
                 </div>
+            {% if forloop.counter|divisibleby:3 %}
+            
+            <div class="row">
+            {% endif %}
+            {% endfor %}
             </div>
         </div>
     </div>
