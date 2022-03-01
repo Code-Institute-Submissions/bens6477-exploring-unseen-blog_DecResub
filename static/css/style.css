@@ -26,3 +26,8 @@
 .jumbotron {
     background-color: transparent;
 }
+
+.div-bottom {
+    position: absolute;
+    bottom: 1rem;
+}
