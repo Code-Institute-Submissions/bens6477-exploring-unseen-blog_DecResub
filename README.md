@@ -16,3 +16,7 @@ Epics were refined into User Stories and further split into specific Tasks to co
 
 ## Notes
 The first commit with django integration pushed a secret key to GitHub, however this was resolved immediately in the next commit using the env.py file. This contained sensitive data not to be publicly accessible on GitHub and was withheld using the .gitignore file.
+
+
+To Write About
+* Linear gradient background - also has the effect of dimming as user scrolls down
