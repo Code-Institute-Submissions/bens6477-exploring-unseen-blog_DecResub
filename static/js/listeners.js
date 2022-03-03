@@ -9,6 +9,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 hero[0].style.backgroundImage = "url('https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')";
             case heroPageAttribute = "article":
                 hero[0].style.backgroundImage = "url('https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')";
+            case heroPageAttribute = "login":
+                hero[0].style.backgroundImage = "url('https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')";
+            case heroPageAttribute = "signup":
+                hero[0].style.backgroundImage = "url('https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')";
+            case heroPageAttribute = "logout":
+                hero[0].style.backgroundImage = "url('https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')";
         }
     }
 })
