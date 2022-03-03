@@ -8,4 +8,3 @@ class ArticleList(generic.ListView):
     queryset = Article.objects.filter(approved=True).order_by('-created_date')
     template_name = 'index.html'
     paginate_by = 6
-    

@@ -17,6 +17,7 @@ Exploring Unseen
     </div>
 </div>
 
+<!-- List of articles -->
 <div class="container mt-3 mb-3">
     <div class="row">
         <div class="col-12 mt-3 left">
@@ -25,20 +26,34 @@ Exploring Unseen
             <hr>
         </div>
     </div>
-
+    <!-- Adding articles -->
     <div class="row">
         <div class="col-12 mt-3 left">
             <div class="row">
             {% for article in article_list %}
                 <div class="col-md-4">
                     <div class="card">
-                        <img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card image cap">
+                        <!-- Article image -->
+                        {% if "default_image" in article.image.url %}
+                        <a href="/article/view/{{ article.id }}"><img class="card-img-top" src="{{ article.image.url }}" alt="Article image" /></a>
+                        {% else %}
+                        <a href="/article/view/{{ article.id }}"><img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Article image" /></a>
+                        {% endif %}
+                        <!-- Article content -->
                         <div class="card-body">
                             <h5 class="card-title">{{ article.title }}</h5>
                             <p class="card-text">{{ article.summary }}</p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">Updated on {{ article.updated_date }}</small>
+                            <small class="text-muted">{{ article.updated_date }}</small>
+                            <!-- User voting -->
+                            <span>
+                                <!-- Upvote -->
+                                <i class="fas fa-arrow-alt-circle-up"></i>
+                                <span> {{ article.vote_count }} </span>
+                                <!-- Downvote -->
+                                <i class="fas fa-arrow-alt-circle-down"></i>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -54,10 +69,10 @@ Exploring Unseen
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Previous </a></li>
             {% endif %}
             {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Next &raquo;</a></li>
             {% endif %}
         </ul>
     </nav>
