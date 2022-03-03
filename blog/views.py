@@ -14,7 +14,7 @@ class ArticleDetail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Article.objects.filter(approved=True)
         article = get_object_or_404(queryset, slug=slug)
-        comments = article.comments.filter(approved=True).order_by('created_on')
+        # comments = article.comments.filter(approved=True).order_by('created_on')
         upvoted = False
         if article.upvotes.filter(id=self.request.user.id).exists():
             upvoted = True
@@ -26,7 +26,7 @@ class ArticleDetail(View):
             "article_detail.html",
             {
                 "article": article,
-                "comments": comments,
+                # "comments": comments,
                 "upvoted": upvoted,
                 "downvoted": downvoted,
             }   
