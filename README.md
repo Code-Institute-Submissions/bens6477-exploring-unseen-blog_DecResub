@@ -20,3 +20,4 @@ The first commit with django integration pushed a secret key to GitHub, however 
 
 To Write About
 * Linear gradient background - also has the effect of dimming as user scrolls down
+https://codepen.io/kaustavbanerjee/pen/JKZPve
