@@ -3,11 +3,19 @@
 
 
 <!-- Hero image container -->
-<div class="container-fluid callout-container">
-    <div class="opaque-overlay"> </div>
-    <div class="div-bottom h1 text-center text-light">
+<div id="article-hero" class="container-fluid hero-container">
+    <div class="hero-overlay"> </div>
+    <div class="hero-footer h1 text-center text-light">
         <h1>Explore</h1>
         <i class="fas fa-angle-down"></i>
+
+        <!-- Article image -->
+        {% if "default_image" in article.image.url %}
+        <script type="text/javascript">
+            document.getElementById("article-hero").style.backgroundImage = "url('')";
+        </script>
+        {% endif %}
+        
     </div>
 </div>
 
