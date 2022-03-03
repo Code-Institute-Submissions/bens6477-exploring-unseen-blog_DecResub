@@ -7,4 +7,5 @@ class ArticleList(generic.ListView):
     model = Article
     queryset = Article.objects.filter(approved=True).order_by('-created_date')
     template_name = 'index.html'
-    paginate_by = 8
+    paginate_by = 6
+    
