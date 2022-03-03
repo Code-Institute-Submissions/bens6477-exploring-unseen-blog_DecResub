@@ -21,3 +21,5 @@ The first commit with django integration pushed a secret key to GitHub, however 
 To Write About
 * Linear gradient background - also has the effect of dimming as user scrolls down
 https://codepen.io/kaustavbanerjee/pen/JKZPve
+
+* Add hero image through external javascript file using data-hero-page custom attribute and switch case logic. Inspiration from RPSLS and simon-game.
