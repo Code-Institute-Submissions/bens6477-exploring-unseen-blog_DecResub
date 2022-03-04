@@ -54,7 +54,7 @@ class Comment(models.Model):
     """
     Model for creating article comments.
     """
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")
     user_name = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
