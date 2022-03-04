@@ -30,6 +30,7 @@ class ArticleDetail(View):
                 "comments": comments,
                 "upvoted": upvoted,
                 "downvoted": downvoted,
+                "comment_form": CommentForm(),
             }   
         )
 

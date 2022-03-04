@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% load crispy_forms_tags %}
+
 
 <!-- Hero image container -->
 <div id="article-hero" data-hero-page="article" class="container-fluid hero-container">
@@ -16,6 +18,23 @@
         </script>
         {% endif %}
         
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            Comments
+            {% if user.is_authenticated %}
+            <h3>Add a comment:</h3>
+            <p>Posting as: {{ user.username }}</p>
+            <form action="POST">
+                {{ comment_form | crispy }}
+                {% csrf_token %}
+                <button type="submit">Submit</button>
+            </form>
+            {% endif %}
+        </div>
     </div>
 </div>
 
