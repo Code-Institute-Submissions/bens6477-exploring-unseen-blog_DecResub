@@ -20,6 +20,8 @@ class Article(models.Model):
     """
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
+    attraction = models.CharField(max_length=200, unique=True, default="Attraction")
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_articles")
     summary = models.CharField(max_length=250)
@@ -32,7 +34,6 @@ class Article(models.Model):
     downvotes = models.ManyToManyField(
         User, related_name="article_downvotes", blank=True)
     approved = models.BooleanField(default=False)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-created_date']
