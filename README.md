@@ -14,6 +14,21 @@ The project board can be viewed [here](https://bens6477.atlassian.net/jira/softw
 Epics were refined into User Stories and further split into specific Tasks to complete.
 
 
+## Technology Used
+
+* HTML
+* CSS
+* JavaScript
+* Python
+* Django
+* Summernote
+* Cloudinary
+* Allauth
+* PostgreSQL
+* psycopg2
+* cripsy forms
+
+
 ## Notes
 The first commit with django integration pushed a secret key to GitHub, however this was resolved immediately in the next commit using the env.py file. This contained sensitive data not to be publicly accessible on GitHub and was withheld using the .gitignore file.
 
