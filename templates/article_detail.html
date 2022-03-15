@@ -24,8 +24,17 @@
 <!-- Comments -->
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-12">
             <h2>Comments</h2>
+            {% for comment in comments %}
+            <h4>{{ comment.user_name }}</h4>
+            <p>{{ comment.body }}</p>
+            {% endfor %}
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
             {% if commented %}
             <div role="alert">
                 Your comment is awaiting approval
