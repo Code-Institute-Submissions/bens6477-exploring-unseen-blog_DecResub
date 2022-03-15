@@ -21,18 +21,26 @@
     </div>
 </div>
 
+<!-- Comments -->
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            Comments
+            <h2>Comments</h2>
+            {% if commented %}
+            <div role="alert">
+                Your comment is awaiting approval
+            </div>
+            {% else %}
+
             {% if user.is_authenticated %}
             <h3>Add a comment:</h3>
             <p>Posting as: {{ user.username }}</p>
-            <form action="POST">
+            <form action="post">
                 {{ comment_form | crispy }}
                 {% csrf_token %}
                 <button type="submit">Submit</button>
             </form>
+            {% endif %}
             {% endif %}
         </div>
     </div>
