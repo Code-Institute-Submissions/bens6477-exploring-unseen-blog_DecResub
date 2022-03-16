@@ -39,6 +39,7 @@ class ArticleDetail(View):
         queryset = Article.objects.filter(approved=True)
         article = get_object_or_404(queryset, slug=slug)
         comments = article.comments.filter(approved=True).order_by('created_on')
+        user = request.user.id
         upvoted = False
         if article.upvotes.filter(id=self.request.user.id).exists():
             upvoted = True
@@ -50,13 +51,13 @@ class ArticleDetail(View):
 
         if comment_form.is_valid():
             comment_form.instance.email = request.user.email
-            comment_form.instance.name = request.user.username
+            comment_form.instance.user_name = request.user
             comment = comment_form.save(commit=False)
             comment.article = article
             comment.save()
         else:
             comment_form = CommentForm()
-
+        
         return render(
             request,
             "article_detail.html",

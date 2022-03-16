@@ -57,6 +57,7 @@ class Comment(models.Model):
     """
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")
     user_name = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.EmailField(default="")
     created_on = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
     approved = models.BooleanField(default=False)
@@ -65,4 +66,4 @@ class Comment(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return self.body
+        return f"{self.body}"

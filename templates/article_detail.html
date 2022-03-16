@@ -44,8 +44,9 @@
             {% if user.is_authenticated %}
             <h3>Add a comment:</h3>
             <p>Posting as: {{ user.username }}</p>
-            <form action="post">
+            <form method="post">
                 {{ comment_form | crispy }}
+                <!-- <textarea name="body" cols="50" rows="5" required="" id="id_body" class="form-control ms-0 me-5" placeholder="Join the discussion!"></textarea> -->
                 {% csrf_token %}
                 <button type="submit">Submit</button>
             </form>
