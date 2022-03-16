@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
+from django.http import HttpResponseRedirect
 from .models import Article
 from .forms import CommentForm
 
@@ -39,7 +40,6 @@ class ArticleDetail(View):
         queryset = Article.objects.filter(approved=True)
         article = get_object_or_404(queryset, slug=slug)
         comments = article.comments.filter(approved=True).order_by('created_on')
-        user = request.user.id
         upvoted = False
         if article.upvotes.filter(id=self.request.user.id).exists():
             upvoted = True
@@ -72,3 +72,13 @@ class ArticleDetail(View):
         )
 
 
+class ArticleUpvote(View):
+    def post(self, request, slug):
+        article = get_object_or_404(Article, slug=slug)
+        if article.upvotes.filter(id=request.user.id).exists():
+            article.upvotes.remove(request.user)
+        else:
+            article.upvotes.add(request.user)
+        
+        return HttpResponseRedirect(reverse('article_detail', args=[slug]))
+        
