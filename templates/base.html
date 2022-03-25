@@ -15,7 +15,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
         <a class="navbar-brand" href="{% url 'home' %}">Exploring Unseen</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +46,18 @@
         </div>
     </nav>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% for message in messages %}
+                <div id="msg" class="alert {{ message.tags }} alert-dismissable fade show" role="alert">
+                    {{ message | safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
     {% block content %}
     <!-- Content from other files inserted here -->
