@@ -21,18 +21,7 @@
     </div>
 </div>
 
-<!-- Comments -->
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h2>Comments</h2>
-            {% for comment in comments %}
-            <h4>{{ comment.user_name }}</h4>
-            <p>{{ comment.body }}</p>
-            {% endfor %}
-            <hr>
-        </div>
-    </div>
     <!-- Voting -->
     <!-- Upvote -->
     <div class="row">
@@ -74,6 +63,22 @@
             {% endif %}
         </div>
     </div>
+</div>
+    
+<!-- Comments -->
+<div class="container">
+    <!-- Display approved comments -->
+    <div class="row">
+        <div class="col-12">
+            <h2>Comments</h2>
+            {% for comment in comments %}
+            <h4>{{ comment.user_name }}</h4>
+            <p>{{ comment.body }}</p>
+            {% endfor %}
+            <hr>
+        </div>
+    </div>
+    <!-- Writing new user comment -->
     <div class="row">
         <div class="col-12">
             {% if commented %}
