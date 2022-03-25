@@ -79,6 +79,20 @@ class ArticleUpvote(View):
             article.upvotes.remove(request.user)
         else:
             article.upvotes.add(request.user)
+            if article.downvotes.filter(id=request.user.id).exists():
+                article.downvotes.remove(request.user)
         
         return HttpResponseRedirect(reverse('article_detail', args=[slug]))
+
+
+class ArticleDownvote(View):
+    def post(self, request, slug):
+        article = get_object_or_404(Article, slug=slug)
+        if article.downvotes.filter(id=request.user.id).exists():
+            article.downvotes.remove(request.user)
+        else:
+            article.downvotes.add(request.user)
+            if article.upvotes.filter(id=request.user.id).exists():
+                article.upvotes.remove(request.user)
         
+        return HttpResponseRedirect(reverse('article_detail', args=[slug]))
