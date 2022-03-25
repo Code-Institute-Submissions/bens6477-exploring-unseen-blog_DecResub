@@ -38,14 +38,16 @@
     <div class="row">
         <div class="col-12">
             {% if user.is_authenticated %}
-            <form action="" method="post">
+            <form action="{% url 'article_upvote' article.slug %}" method="post">
                 {% csrf_token %}
                 {% if upvoted %}
-                <button class="btn-vote btn-upvoted"><i class="fas fa-chevron-up"></i></button>
+                <button type="submit" class="btn-vote btn-upvoted"><i class="fas fa-chevron-up"></i></button>
                 {% else %}
-                <button class="btn-vote"><i class="fas fa-chevron-up"></i></button>
+                <button type="submit" class="btn-vote"><i class="fas fa-chevron-up"></i></button>
                 {% endif %}
             </form>
+            {% else %}
+            <span class="btn-vote"><i class="fas fa-chevron-up"></i></span>
             {% endif %}
         </div>
     </div>
@@ -62,11 +64,13 @@
             <form action="" method="post">
                 {% csrf_token %}
                 {% if downvoted %}
-                <button class="btn-vote btn-downvoted"><i class="fas fa-chevron-down"></i></button>
+                <button type="submit" class="btn-vote btn-downvoted"><i class="fas fa-chevron-down"></i></button>
                 {% else %}
-                <button class="btn-vote"><i class="fas fa-chevron-down"></i></button>
+                <button type="submit" class="btn-vote"><i class="fas fa-chevron-down"></i></button>
                 {% endif %}
             </form>
+            {% else %}
+            <span class="btn-vote"><i class="fas fa-chevron-down"></i></span>
             {% endif %}
         </div>
     </div>
