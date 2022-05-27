@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
-from django.http import HttpResponseRedirect
-from .models import Article
+from django.http import HttpResponseRedirect, HttpResponse
+from .models import Article, Country
 from .forms import CommentForm
 
 
@@ -96,3 +96,27 @@ class ArticleDownvote(View):
                 article.upvotes.remove(request.user)
         
         return HttpResponseRedirect(reverse('article_detail', args=[slug]))
+
+
+# class CountriesList(generic.ListView):
+#     model = Country
+#     queryset = Country.objects.filter(approve_country=True)
+#     template_name = 'countries.html'
+#     paginate_by = 6
+
+
+class Countries(View):
+    def get(self, request):
+        countries = Country.objects.all().filter(approve_country=True)
+        context = {'countries': countries}
+        return render(request, 'countries.html', context)
+
+
+# def display_countries(request):
+#     """
+#     Displays the list of categories stored in the Category data
+#     model when the 'Categories' option is selected from the navbar.
+#     """
+#     countries = Country.objects.all().filter(approve_country=True)
+#     context = {"countries": countries}
+#     return render(request, "countries.html", context)
