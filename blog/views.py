@@ -107,7 +107,7 @@ class Countries(View):
 
 class CountryArticles(View):
     def get(self, request, country_name, *args, **kwargs):
-        queryset = Article.objects.all().filter(approved=True, country=1)
+        queryset = Article.objects.all().filter(approved=True, country__country_name=country_name)
         articles = get_list_or_404(queryset)
         return render(
             request,
