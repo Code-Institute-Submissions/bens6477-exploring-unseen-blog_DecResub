@@ -1,5 +1,65 @@
 {% extends "base.html" %}
 {% block content %}
 
+<!-- Hero image container -->
+<div id="home-hero" data-hero-page="home" class="home-hero container-fluid hero-container text-light">
+    <div class="hero-overlay"> </div>
+    <div class="hero-footer h1 text-center text-light">
+        <h1>Countries</h1>
+        <i class="fas fa-angle-down"></i>
+    </div>
+</div>
+
+<!-- List of articles -->
+<div class="container mt-3 mb-3">
+    <div class="row">
+        <div class="col-12 mt-3 left">
+            <h2>Countries</h2>
+            <p>Select a country to explore what's unseen.</p>
+            <hr>
+        </div>
+    </div>
+    <!-- Adding articles -->
+    <div class="row">
+        <div class="col-12 mt-3 left">
+            <div class="row">
+            {% for country in countries %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <!-- Article image -->
+                        {% if "default_image" in article.image.url %}
+                        <a href="#"><img class="card-img-top" src="#" alt="Article image" /></a>
+                        {% else %}
+                        <a href="#"><img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Article image" /></a>
+                        {% endif %}
+                        <!-- Article content -->
+                        <div class="card-body">
+                            <a href="{% url 'countries' %}">
+                                <h5 class="card-title text-center">{{ country.country_name }}</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% if forloop.counter|divisibleby:3 %}
+            
+            <div class="row">
+            {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Previous </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Next &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
 
 {% endblock %}
