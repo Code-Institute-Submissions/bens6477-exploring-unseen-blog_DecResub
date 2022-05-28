@@ -1,0 +1,22 @@
+{
+  "name": "exploring-unseen-blog",
+  "version": "1.0.0",
+  "description": "## Planning",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bens6477/exploring-unseen-blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bens6477/exploring-unseen-blog/issues"
+  },
+  "homepage": "https://github.com/bens6477/exploring-unseen-blog#readme",
+  "devDependencies": {
+    "jest": "^28.1.0"
+  }
+}

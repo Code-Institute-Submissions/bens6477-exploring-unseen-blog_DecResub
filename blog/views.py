@@ -33,7 +33,7 @@ class ArticleDetail(View):
                 "upvoted": upvoted,
                 "downvoted": downvoted,
                 "comment_form": CommentForm(),
-            }   
+            }
         )
     
     def post(self, request, slug, *args, **kwargs):
