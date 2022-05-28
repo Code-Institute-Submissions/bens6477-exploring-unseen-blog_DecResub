@@ -22,6 +22,10 @@ class ArticleAdmin(SummernoteModelAdmin):
     list_filter = ('approved', 'created_date')
     search_fields = ['title', 'content']
     summernote_fields = ('content')
+    actions = ['approve_article']
+
+    def approve_article(self, request, queryset):
+        queryset.update(approved=True)
 
 
 @admin.register(Comment)
