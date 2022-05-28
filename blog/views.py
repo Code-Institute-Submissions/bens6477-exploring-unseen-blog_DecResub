@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, get_list_or_404
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Article, Country
@@ -98,13 +98,6 @@ class ArticleDownvote(View):
         return HttpResponseRedirect(reverse('article_detail', args=[slug]))
 
 
-# class CountriesList(generic.ListView):
-#     model = Country
-#     queryset = Country.objects.filter(approve_country=True)
-#     template_name = 'countries.html'
-#     paginate_by = 6
-
-
 class Countries(View):
     def get(self, request):
         countries = Country.objects.all().filter(approve_country=True)
@@ -112,11 +105,12 @@ class Countries(View):
         return render(request, 'countries.html', context)
 
 
-# def display_countries(request):
-#     """
-#     Displays the list of categories stored in the Category data
-#     model when the 'Categories' option is selected from the navbar.
-#     """
-#     countries = Country.objects.all().filter(approve_country=True)
-#     context = {"countries": countries}
-#     return render(request, "countries.html", context)
+class CountryArticles(View):
+    def get(self, request, country_name, *args, **kwargs):
+        queryset = Article.objects.all().filter(approved=True, country=1)
+        articles = get_list_or_404(queryset)
+        return render(
+            request,
+            "country_articles.html",
+            {"articles": articles}   
+        )

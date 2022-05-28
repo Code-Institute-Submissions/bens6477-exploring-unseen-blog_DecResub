@@ -5,7 +5,7 @@
 <div id="home-hero" data-hero-page="home" class="home-hero container-fluid hero-container text-light">
     <div class="hero-overlay"> </div>
     <div class="hero-footer h1 text-center text-light">
-        <h1>Countries</h1>
+        <h1>Explore</h1>
         <i class="fas fa-angle-down"></i>
     </div>
 </div>
@@ -14,8 +14,8 @@
 <div class="container mt-3 mb-3">
     <div class="row">
         <div class="col-12 mt-3 left">
-            <h2>Countries</h2>
-            <p>Select a country to explore what's unseen...</p>
+            <h2>Welcome to Exploring Unseen</h2>
+            <p>Introduction to home page, articles etc.</p>
             <hr>
         </div>
     </div>
@@ -23,20 +23,37 @@
     <div class="row">
         <div class="col-12 mt-3 left">
             <div class="row">
-            {% for country in countries %}
+            {% for article in articles %}
+            <li>{{ article.title }}</li>
+            {% empty %}
+            <li>No articles yet.</li>
+            {% endfor %}
+            {% for article in articles %}
                 <div class="col-md-4">
                     <div class="card">
                         <!-- Article image -->
                         {% if "default_image" in article.image.url %}
-                        <a href="/country/view/{{ country.country_name }}"><img class="card-img-top" src="#" alt="Article image" /></a>
+                        <a href="/article/view/{{ article.id }}"><img class="card-img-top" src="{{ article.image.url }}" alt="Article image" /></a>
                         {% else %}
-                        <a href="/country/view/{{ country.country_name }}"><img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Article image" /></a>
+                        <a href="/article/view/{{ article.id }}"><img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Article image" /></a>
                         {% endif %}
                         <!-- Article content -->
                         <div class="card-body">
-                            <a href="{% url 'country_articles' country.country_name %}">
-                                <h5 class="card-title text-center">{{ country.country_name }}</h5>
+                            <a href="{% url 'article_detail' article.slug %}">
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <p class="card-text">{{ article.summary }}</p>
                             </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">{{ article.updated_date }}</small>
+                            <!-- User voting -->
+                            <span>
+                                <!-- Upvote -->
+                                <i class="fas fa-arrow-alt-circle-up"></i>
+                                <span> {{ article.vote_count }} </span>
+                                <!-- Downvote -->
+                                <i class="fas fa-arrow-alt-circle-down"></i>
+                            </span>
                         </div>
                     </div>
                 </div>

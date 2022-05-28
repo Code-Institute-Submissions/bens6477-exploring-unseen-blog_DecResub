@@ -7,7 +7,7 @@ class Country(models.Model):
     """
     Model for creating Country categories.
     """
-    country_name = models.CharField(max_length=100)
+    country_name = models.CharField(max_length=100, default="")
     approve_country = models.BooleanField(default=False)
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Article(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     attraction = models.CharField(max_length=200, unique=True, default="Attraction")
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, default="")
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_articles")
     summary = models.CharField(max_length=250)
