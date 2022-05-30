@@ -131,7 +131,41 @@ class ArticleEdit(View):
         context = {
             "form": form,
             "article": article,
+            "slug": article.slug,
         }
+        return render(request, "edit_article.html", context)
+
+    def post(self, request, slug):
+        article = get_object_or_404(Article, slug=slug)
+        country_name = article.country
+        country = get_object_or_404(Country, country_name=country_name)
+        articles = list(Article.objects.all())
+        form = ArticleForm(instance=article)
+        form = ArticleForm(request.POST, request.FILES, instance=article)
+        if form.is_valid():
+            form.instance.author = request.user
+            form.instance.country = country
+            summernote = request.POST.get("editordata")
+            form.instance.content = summernote
+            form.instance.attraction = request.POST.get("attraction")
+            form.instance.summary = request.POST.get("summary")
+            form.instance.slug = form.instance.title.replace(" ", "-").lower()
+            form.save()
+            queryset = Article.objects.all().filter(approved=True, country__country_name=country_name)
+            article_queryset = get_list_or_404(queryset)
+            return render(
+                request,
+                "country_articles.html",
+                {
+                    "articles": article_queryset,
+                    "country_name": country
+                }   
+            )
+        context = {
+            "form": form,
+            "article": article,
+            "slug": article.slug,
+            }
         return render(request, "edit_article.html", context)
 
 
