@@ -211,3 +211,29 @@ class CountryEdit(View):
 
         context = {"form": form}
         return render(request, "edit_country.html", context)
+        
+    def post(self, request, country_name):
+        country = get_object_or_404(Country, country_name=country_name)
+        countries = list(Country.objects.all())
+        form = CountryForm()
+
+        form = CountryForm(request.POST, instance=country)
+        if form.is_valid():
+            for country in countries:
+                name = form.instance.country_name
+                if country.country_name == name:
+                    messages.add_message(
+                        request,
+                        messages.INFO,
+                        "A country with the same name already exists.",
+                    )
+                    context = {"form": form}
+                    return render(request, "edit_country.html", context)
+            form.save()
+            messages.add_message(
+                request, messages.INFO, "Your country is awaiting approval"
+            )
+            return redirect("countries")
+        
+        context = {"form": form}
+        return render(request, "edit_country.html", context)
