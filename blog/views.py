@@ -74,40 +74,53 @@ class ArticleDetail(View):
 
 
 class ArticleAdd(View):
-    def get(self, request, country_name):
+    def get(self, request, country_name):        
         country = get_object_or_404(Country, country_name=country_name)
         articles = list(Article.objects.all())
         form = ArticleForm()
         context = {"form": form}
         return render(request, "add_article.html", context)
 
-    # def post(self):
-    #     category = get_object_or_404(Country, id=country_id)
-    #     articles = list(Article.objects.all())
-    #     form = ArticleForm()
-    #     form = ArticleForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         form.instance.author = request.user
-    #         form.instance.country = country
-    #         summernote = request.POST.get("editordata")
-    #         form.instance.content = summernote
-    #         for article in articles:
-    #             name = form.instance.title
-    #             if article.title == name:
-    #                 messages.add_message(
-    #                     request,
-    #                     messages.INFO,
-    #                     "An article with the same title already exists.",
-    #                 )
-    #                 context = {"form": form}
-    #                 return render(request, "add_article.html", context)
-    #         form.save()
-    #         messages.add_message(
-    #             request, messages.INFO, "Your article is awaiting approval"
-    #         )
-    #         return redirect("home", country_id=country_id)
-    #     context = {"form": form}
-    #     return render(request, "add_article.html", context)
+    def post(self, request, country_name):
+        country = get_object_or_404(Country, country_name=country_name)
+        articles = list(Article.objects.all())
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.instance.author = request.user
+            form.instance.country = country
+            summernote = request.POST.get("editordata")
+            form.instance.content = summernote
+            for article in articles:
+                form.instance.attraction = request.POST.get("attraction")
+                form.instance.summary = request.POST.get("summary")
+
+                name = form.instance.title
+                if article.title == name:
+                    messages.add_message(
+                        request,
+                        messages.INFO,
+                        "An article with the same title already exists.",
+                    )
+                    context = {"form": form}
+                    return render(request, "add_article.html", context)
+
+            form.instance.slug = form.instance.title.replace(" ", "-").lower()
+            form.save()
+            messages.add_message(
+                request, messages.INFO, "Your article is awaiting approval"
+            )
+            queryset = Article.objects.all().filter(approved=True, country__country_name=country_name)
+            article_queryset = get_list_or_404(queryset)
+            return render(
+                request,
+                "country_articles.html",
+                {
+                    "articles": article_queryset,
+                    "country_name": country
+                }   
+            )
+        context = {"form": form}
+        return render(request, "add_article.html", context)
 
 
 class ArticleEdit(View):
@@ -178,8 +191,6 @@ class CountryAdd(View):
         
     def post(self, request):
         countries = list(Country.objects.all())
-        form = CountryForm()
-
         form = CountryForm(request.POST)
         if form.is_valid():
             # form.instance.category_author = request.user
@@ -208,15 +219,12 @@ class CountryEdit(View):
         country = get_object_or_404(Country, country_name=country_name)
         countries = list(Country.objects.all())
         form = CountryForm(instance=country)
-
         context = {"form": form}
         return render(request, "edit_country.html", context)
         
     def post(self, request, country_name):
         country = get_object_or_404(Country, country_name=country_name)
         countries = list(Country.objects.all())
-        form = CountryForm()
-
         form = CountryForm(request.POST, instance=country)
         if form.is_valid():
             for country in countries:

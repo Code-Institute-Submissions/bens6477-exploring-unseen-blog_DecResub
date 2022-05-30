@@ -5,7 +5,7 @@ from django import forms
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ('title', 'image', 'summary',)
+        fields = ('title', 'image', 'summary', 'attraction')
 
 
 class CountryForm(forms.ModelForm):

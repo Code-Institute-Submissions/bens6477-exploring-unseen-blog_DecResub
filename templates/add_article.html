@@ -22,10 +22,15 @@
     <div class="col-12 col-md-8 offset-md-2">
       <form action="{{ blog.views.add_article }}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <!-- Headline -->
+        <!-- Article Title -->
         <div class="row pt-3">Title:</div>
         <div class="row">{{ form.title }}</div>
-        <!-- Summary -->
+        <!-- Article Attraction -->
+        <div class="row pt-3">Attraction:</div>
+        <div class="row">
+          <textarea name="attraction" cols="40" rows="10" maxlength="150" required="" id="id_attraction" class="article-attraction"></textarea>
+        </div>
+        <!-- Article Summary -->
         <div class="row pt-3">Summary:</div>
         <div class="row">
           <textarea name="summary" cols="40" rows="10" maxlength="150" required="" id="id_summary" class="article-summary"></textarea>
