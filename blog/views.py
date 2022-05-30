@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, get_list_or_404
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Article, Country
-from .forms import CommentForm
+from .forms import ArticleForm, CommentForm
 
 
 class ArticleList(generic.ListView):
@@ -72,6 +72,44 @@ class ArticleDetail(View):
         )
 
 
+class ArticleAdd(View):
+    def get(self, request, country_name):
+        country = get_object_or_404(Country, country_name=country_name)
+        articles = list(Article.objects.all())
+        form = ArticleForm()
+        context = {"form": form}
+        return render(request, "add_article.html", context)
+
+    # def post(self):
+    #     category = get_object_or_404(Country, id=country_id)
+    #     articles = list(Article.objects.all())
+    #     form = ArticleForm()
+    #     form = ArticleForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         form.instance.author = request.user
+    #         form.instance.country = country
+    #         summernote = request.POST.get("editordata")
+    #         form.instance.content = summernote
+    #         for article in articles:
+    #             name = form.instance.title
+    #             if article.title == name:
+    #                 messages.add_message(
+    #                     request,
+    #                     messages.INFO,
+    #                     "An article with the same title already exists.",
+    #                 )
+    #                 context = {"form": form}
+    #                 return render(request, "add_article.html", context)
+    #         form.save()
+    #         messages.add_message(
+    #             request, messages.INFO, "Your article is awaiting approval"
+    #         )
+    #         return redirect("home", country_id=country_id)
+    #     context = {"form": form}
+    #     return render(request, "add_article.html", context)
+
+
+
 class ArticleUpvote(View):
     def post(self, request, slug):
         article = get_object_or_404(Article, slug=slug)
@@ -112,5 +150,8 @@ class CountryArticles(View):
         return render(
             request,
             "country_articles.html",
-            {"articles": articles}   
+            {
+                "articles": articles,
+                "country_name": country_name
+            }   
         )
