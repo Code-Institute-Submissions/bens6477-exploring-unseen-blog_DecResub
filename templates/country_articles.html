@@ -24,11 +24,6 @@
         <div class="col-12 mt-3 left">
             <div class="row">
             {% for article in articles %}
-            <li>{{ article.title }}</li>
-            {% empty %}
-            <li>No articles yet.</li>
-            {% endfor %}
-            {% for article in articles %}
                 <div class="col-md-4">
                     <div class="card">
                         <!-- Article image -->

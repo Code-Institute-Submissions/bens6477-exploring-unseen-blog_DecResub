@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404, reverse, get_list_or_404
+from django.shortcuts import render, reverse, redirect, get_object_or_404, get_list_or_404
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib import messages
 from .models import Article, Country
 from .forms import ArticleForm, CountryForm, CommentForm
 
@@ -170,8 +171,34 @@ class CountryArticles(View):
 
 class CountryAdd(View):
     def get(self, request):
-        articles = list(Country.objects.all())
+        countries = list(Country.objects.all())
         form = CountryForm()
+        context = {"form": form}
+        return render(request, "add_country.html", context)
+        
+    def post(self, request):
+        countries = list(Country.objects.all())
+        form = CountryForm()
+
+        form = CountryForm(request.POST)
+        if form.is_valid():
+            # form.instance.category_author = request.user
+            for country in countries:
+                name = form.instance.country_name
+                if country.country_name == name:
+                    messages.add_message(
+                        request,
+                        messages.INFO,
+                        "A country with the same name already exists.",
+                    )
+                    context = {"form": form}
+                    return render(request, "add_country.html", context)
+            form.save()
+            messages.add_message(
+                request, messages.INFO, "Your country is awaiting approval"
+            )
+            return redirect("countries")
+        
         context = {"form": form}
         return render(request, "add_country.html", context)
 
