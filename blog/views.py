@@ -163,3 +163,13 @@ class CountryAdd(View):
         form = CountryForm()
         context = {"form": form}
         return render(request, "add_country.html", context)
+
+
+class CountryEdit(View):
+    def get(self, request, country_name):
+        country = get_object_or_404(Country, country_name=country_name)
+        countries = list(Country.objects.all())
+        form = CountryForm(instance=country)
+
+        context = {"form": form}
+        return render(request, "edit_country.html", context)
