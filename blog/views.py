@@ -109,6 +109,17 @@ class ArticleAdd(View):
     #     return render(request, "add_article.html", context)
 
 
+class ArticleEdit(View):
+    def get(self, request, slug):
+        article = get_object_or_404(Article, slug=slug)
+        articles = list(Article.objects.all())
+        form = ArticleForm(instance=article)
+        context = {
+            "form": form,
+            "article": article,
+        }
+        return render(request, "edit_article.html", context)
+
 
 class ArticleUpvote(View):
     def post(self, request, slug):

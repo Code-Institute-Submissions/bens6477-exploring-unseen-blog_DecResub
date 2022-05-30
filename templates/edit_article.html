@@ -1,0 +1,53 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <!-- Message alerts for authentication, articles awaiting approval and errors -->
+    <div class="col-6 offset-3 pt-3">
+      {% for message in messages %}
+      <div role="alert" id="msg" class="alert alert-dismissible fade show {{ message.tags }}">
+        {{ message | safe }}
+        <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- Title -->
+  <div class="row pt-3">
+    <h1 class="center-text">Edit Article</h1>
+  </div>
+  <!-- Article details to edit -->
+  <div class="row mx-auto">
+    <div class="col-12 col-md-8 offset-md-2">
+      <form action="{{ news.views.edit_article }}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Headline -->
+        <div class="row pt-3">Title:</div>
+        <div class="row">{{ form.title }}</div>
+        <!-- Summary -->
+        <div class="row pt-3">Summary:</div>
+        <div class="row">
+          <textarea name="summary" cols="40" rows="10" maxlength="150" required="" id="id_summary" class="article-summary"></textarea>
+        </div>
+        <!-- Image -->
+        <div class="row pt-3">Image:</div>
+        <div class="row pt-0 pb-3 ps-0 me-0">
+          <div>
+            {{ form.image }}
+          </div>
+        </div>
+        <!-- Article Content -->
+        <div class="row pt-3">Article Content:</div>
+        <div class="row">
+          <textarea id="summernote" name="editordata"></textarea>
+        </div>
+        <div class="row pt-3">
+          <button class="btn btn-primary content-width mx-auto" type="submit">Update Article</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

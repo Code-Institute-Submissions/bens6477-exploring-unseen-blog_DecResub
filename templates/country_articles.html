@@ -42,6 +42,9 @@
                             <a href="{% url 'article_detail' article.slug %}">
                                 <h5 class="card-title">{{ article.title }}</h5>
                                 <p class="card-text">{{ article.summary }}</p>
+                                {% if user.is_authenticated %}
+                                <a class="btn btn-primary" href="{% url 'edit_article' article.slug %}">Edit Country</a>
+                                {% endif %}
                             </a>
                         </div>
                         <div class="card-footer">
