@@ -39,6 +39,7 @@
                                 <p class="card-text">{{ article.summary }}</p>
                                 {% if user.is_authenticated %}
                                 <a class="btn btn-primary" href="{% url 'edit_article' article.slug %}">Edit Article</a>
+                                <a class="btn btn-primary" href="{% url 'delete_article' article.slug %}">Delete Article</a>
                                 {% endif %}
                             </a>
                         </div>

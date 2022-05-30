@@ -169,6 +169,22 @@ class ArticleEdit(View):
         return render(request, "edit_article.html", context)
 
 
+class ArticleDelete(View):
+    def get(self, request, slug):
+        article = get_object_or_404(Article, slug=slug)
+        country_name = article.country
+        articles = list(Article.objects.all())
+        article.delete()
+        return render(
+            request,
+            "country_articles.html",
+            {
+                "articles": articles,
+                "country_name": country
+            }   
+        )
+
+
 class ArticleUpvote(View):
     def post(self, request, slug):
         article = get_object_or_404(Article, slug=slug)

@@ -12,5 +12,6 @@ urlpatterns = [
     path('upvote/<slug:slug>/', views.ArticleUpvote.as_view(), name='article_upvote'),
     path('downvote/<slug:slug>/', views.ArticleDownvote.as_view(), name="article_downvote"),
     path('article/add/<slug:country_name>/', views.ArticleAdd.as_view(), name="add_article"),
-    path('article/edit/<slug:slug>/', views.ArticleEdit.as_view(), name="edit_article")
+    path('article/edit/<slug:slug>/', views.ArticleEdit.as_view(), name="edit_article"),
+    path('article/delete/<slug:slug>/', views.ArticleDelete.as_view(), name="delete_article")
 ]
