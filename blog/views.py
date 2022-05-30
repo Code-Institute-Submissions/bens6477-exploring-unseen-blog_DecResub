@@ -237,3 +237,10 @@ class CountryEdit(View):
         
         context = {"form": form}
         return render(request, "edit_country.html", context)
+
+
+class CountryDelete(View):
+    def get(self, request, country_name):
+        country = get_object_or_404(Country, country_name=country_name)
+        country.delete()
+        return redirect('countries')

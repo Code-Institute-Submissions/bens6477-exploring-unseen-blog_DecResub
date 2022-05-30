@@ -38,6 +38,7 @@
                                 <h5 class="card-title text-center">{{ country.country_name }}</h5>
                                 {% if user.is_authenticated %}
                                 <a class="btn btn-primary" href="{% url 'edit_country' country.country_name %}">Edit Country</a>
+                                <a class="btn btn-primary" href="{% url 'delete_country' country.country_name %}">Delete Country</a>
                                 {% endif %}
                             </a>
                         </div>
