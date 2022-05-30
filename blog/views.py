@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, get_list_or_404
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Article, Country
-from .forms import ArticleForm, CommentForm
+from .forms import ArticleForm, CountryForm, CommentForm
 
 
 class ArticleList(generic.ListView):
@@ -155,3 +155,11 @@ class CountryArticles(View):
                 "country_name": country_name
             }   
         )
+
+
+class CountryAdd(View):
+    def get(self, request):
+        articles = list(Country.objects.all())
+        form = CountryForm()
+        context = {"form": form}
+        return render(request, "add_country.html", context)

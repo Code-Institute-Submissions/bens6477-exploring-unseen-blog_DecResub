@@ -8,6 +8,12 @@ class ArticleForm(forms.ModelForm):
         fields = ('title', 'image', 'summary',)
 
 
+class CountryForm(forms.ModelForm):
+    class Meta: 
+        model = Country
+        fields = ('country_name',)
+
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
