@@ -26,13 +26,7 @@
             {% for country in countries %}
                 <div class="col-md-4">
                     <div class="card">
-                        <!-- Article image -->
-                        {% if "default_image" in article.image.url %}
-                        <a href="/country/view/{{ country.country_name }}"><img class="card-img-top" src="#" alt="Article image" /></a>
-                        {% else %}
-                        <a href="/country/view/{{ country.country_name }}"><img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Article image" /></a>
-                        {% endif %}
-                        <!-- Article content -->
+                        <!-- Country content -->
                         <div class="card-body">
                             <a href="{% url 'country_articles' country.country_name %}">
                                 <h5 class="card-title text-center">{{ country.country_name }}</h5>
@@ -45,7 +39,7 @@
                     </div>
                 </div>
             {% if forloop.counter|divisibleby:3 %}
-            
+            </div>
             <div class="row">
             {% endif %}
             {% endfor %}
