@@ -45,7 +45,7 @@
         <!-- Article Content -->
         <div class="row pt-3">Article Content:</div>
         <div class="row">
-          <textarea id="summernote" name="editordata">{{ form.summernote.value }}</textarea>
+          <textarea id="summernote" name="editordata">{{ article.content | safe }}</textarea>
         </div>
         <div class="row pt-3">
           <button class="btn btn-primary content-width mx-auto" type="submit">Update Article</button>

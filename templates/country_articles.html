@@ -14,8 +14,8 @@
 <div class="container mt-3 mb-3">
     <div class="row">
         <div class="col-12 mt-3 left">
-            <h2>Welcome to Exploring Unseen</h2>
-            <p>Introduction to home page, articles etc.</p>
+            <h2>{{ country_name }}</h2>
+            <p>Explore what's unseen in {{ country_name }}...</p>
             <hr>
         </div>
     </div>
@@ -24,7 +24,7 @@
         <div class="col-12 mt-3 left">
             <div class="row">
             {% for article in articles %}
-                <div class="card-group col-md-4">
+                <div class="card-group col-md-4 mb-4">
                     <div class="card">
                         <!-- Article image -->
                         {% if "default_image" in article.image.url %}
@@ -38,21 +38,15 @@
                                 <h5 class="card-title">{{ article.title }}</h5>
                                 <p class="card-text">{{ article.summary }}</p>
                                 {% if user.is_authenticated %}
-                                    <a id="edit-article" class="btn btn-info" href="{% url 'edit_article' article.slug %}">Edit Article</a>
-                                    <a id="delete-article" class="btn btn-danger" href="{% url 'delete_article' article.slug %}">Delete Article</a>
+                                <div class="mt-4">
+                                    <a class="btn btn-info" href="{% url 'edit_article' article.slug %}">Edit Article</a>
+                                    <a class="btn btn-danger float-right" href="{% url 'delete_article' article.slug %}">Delete Article</a>
+                                </div>
                                 {% endif %}
                             </a>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">{{ article.updated_date }}</small>
-                            <!-- User voting -->
-                            <span>
-                                <!-- Upvote -->
-                                <i class="fas fa-arrow-alt-circle-up"></i>
-                                <span> {{ article.vote_count }} </span>
-                                <!-- Downvote -->
-                                <i class="fas fa-arrow-alt-circle-down"></i>
-                            </span>
                         </div>
                     </div>
                 </div>

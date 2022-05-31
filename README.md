@@ -244,3 +244,11 @@ You can clone this repository to view, edit and run the code. The steps to clone
 * [Django Documentation](https://docs.djangoproject.com/en/3.2/)
 * Cloudinary documentation including [installation](https://cloudinary.com/documentation/django_image_and_video_upload)
 * Summernote documentation including [installation](https://summernote.org/getting-started/#installation)
+
+### Articles
+* [The Gorges of the Ardèche](https://www.avignon-et-provence.com/en/natural-sites/gorges-ardeche)
+* []()
+* []()
+* []()
+* []()
+* []()
