@@ -5,6 +5,8 @@ Exploring Unseen is an collaborative travel blog created by its users. Discover 
 
 Sign up today to like, comment and share the experiences that others haven't seen.
 
+[Live Site Link](https://exploring-unseen.herokuapp.com/)
+
 ![Site Overview](readme_images/home.png)
 
 
