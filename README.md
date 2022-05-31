@@ -66,33 +66,53 @@ This app is a simple, fast-paced app which you can play against the computer in 
 
 ## Planning
 
-### Agile Approach
-This project was implemented using an Agile approach to take advantage of the iterative and incremental development.
-
-A key advantage of this approach was the iterative and incremental development, which created a highly adaptable and efficient work schedule. Tasks were completed in stages to fulfil user stories, which incrementally improved the functionality of the website. The project was split into two-day iterations, to review progress and adjust the work schedule accordingly.
-
-Jira was used to organise the project tasks and timeline. A kanban board was used to move user stories across To Do, In Progress and Done columns according to their status.
-
-The project board can be viewed [here](https://bens6477.atlassian.net/jira/software/projects/EUB/boards/1).
-
-Epics were refined into User Stories and further split into specific Tasks to complete.
-
-
 ### Target Audience
 * Users who wish to explore new places and attractions.
 * Users who are looking to engage in an interactive community of travelers.
 * Users who are looking share their traveling highlights favourite places.
 
+### Agile Approach
+This project was implemented using an Agile approach to take advantage of the iterative and incremental development.
+
+A key advantage of this approach was the iterative and incremental development, which created a highly adaptable and efficient work schedule. Tasks were completed in stages to fulfil user stories, which incrementally improved the functionality of the website. The project was split into two-day iterations, to review progress and adjust the work schedule accordingly.
+
+GitHub Projects was used to organise the project tasks and timeline. A kanban board was used to move user stories across To Do, In Progress and Done columns according to their status.
+
+![Kanban](readme_images/kanban.png)
+
 
 ### User Stories
-As a user, I want:
-* A simple, clean layout, providing everything I need for smooth gameplay.
-* To view instructions on how to play the game.
-* To view a clean game area with only the essential information for each stage.
-* To easily input data in an intuitive manner.
-* To be clearly informed of errors when I've given invalid information. 
-* To easily view the outcome of each guess.
-* To easily reset the game to play again as many times as desired.
+
+
+* Format Home Page
+    * Paginate articles on home page
+    * Order articles by attribute
+    * View list of articles
+
+* User Accounts
+    * User sign out
+    * User sign in
+    * User Account Registration
+
+* Categories Page
+    * View list of countries Format
+
+* Article Comments
+    * View comments
+    * Update comments
+    * Comment on an article
+    * Approve comments
+
+* Article Votes
+    * View net number of votes
+    * Upvote / downvote article
+
+* CRUD Functionality
+    * Create article drafts
+    * Delete article
+    * Update article
+    * Read Article
+    * Create article
 
 
 ### Wireframes
@@ -254,3 +274,4 @@ You can clone this repository to view, edit and run the code. The steps to clone
 * []()
 * []()
 * []()
+

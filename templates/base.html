@@ -50,7 +50,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8 offset-md-2 mt-5">
+            <div id="messages" class="col-md-8 offset-md-2 mt-5">
                 {% for message in messages %}
                 <div id="msg" class="alert {{ message.tags }} alert-dismissable fade show" role="alert">
                     {{ message | safe }}

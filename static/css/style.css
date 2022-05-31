@@ -45,6 +45,13 @@
     padding: 1rem;
 }
 
+
+/* Message Alerts */
+#messages {
+    margin-bottom: -2rem;
+}
+
+
 /* Bootstrap Cards */
 .card-img-top {
     object-fit: cover;
