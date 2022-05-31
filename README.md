@@ -19,16 +19,15 @@ https://codepen.io/kaustavbanerjee/pen/JKZPve
 
 
 
-# Battleships Game
+# Exploring Unsen
 
 ## Site Overview
-This project uses a mock terminal deployed in Heroku to host a computerised version of the classic board game Battleships.<br>
+Exploring Unseen is an collaborative travel blog created by its users. Discover new places around the world for you to scratch your adventurer itch and start planning your next escapade.
 
-Based on the original [1990 Milton Bradley game rules](https://www.hasbro.com/common/instruct/Battleship.PDF), each player has 5 ships in their fleet, and players take turns guessing the coordinates of their opponent's ships. If the player guesses correctly, a red X is placed in the cell, and if it is wrong it's filled with a yellow ⌀. The first player to sink all of their opponent's ship wins.<br>
+Sign up today to like, comment and share the experiences that others haven't seen.
 
-This app is a simple, fast-paced app which you can play against the computer in a short-duration. Do you have what it takes to beat the computer?
+![Site Overview](readme_images/home.png)
 
-![Site Overview](assets/images/site-overview.png)
 
 ## Contents
 1. [Site Overview](#site-overview)
@@ -82,7 +81,7 @@ GitHub Projects was used to organise the project tasks and timeline. A kanban bo
 
 
 ### User Stories
-
+The following epics were divided into user stories. See project kanban in repo for more detail.
 
 * Format Home Page
     * Paginate articles on home page
@@ -137,18 +136,6 @@ Several wireframes were made prior to building the website to plan the desired l
 
 ![Database model](readme_images/database_model.png)
 
-
-### Styling
-
-
-#### Text Colouring
-* Specific phrases and characters are assigned different colours depending on the data they represent.
-* User input requests are printed in green to emphasise the required action to the user.
-* "Enter to continue" messages are printed in blue to also draw attention, however to differentiate between inputting data and simply pressing Enter.
-* This improves the readability of the game and improves the user experience as the player can differentiate between data quickly and it is much more pleasing to look at.
-
-Colour dependent data is as follows:
-![Colour Key](assets/images/colour-key.png)
 
 ## Features
 
@@ -205,10 +192,19 @@ Automated tests were ran using the following command: <code>python3 manage.py te
 
 
 ### Validator Testing
-* No errors were found when running the HTML code through the [official W3C validator](https://validator.w3.org/)
-* No errors were found when running the CSS code through the [official W3C Jigsaw validator](https://jigsaw.w3.org/css-validator/)
-* No errors were found when running the JavaScript code through the [JSHint validator](https://jshint.com/).
-* No errors were found when running the Python code through the [PEP8 online validator](http://pep8online.com/).
+* HTML
+    * No errors were found when running the HTML code through the [official W3C validator](https://validator.w3.org/)
+* CSS
+    * No errors were found when running the CSS code through the [official W3C Jigsaw validator](https://jigsaw.w3.org/css-validator/)
+* JavaScript
+    * No errors were found when running the JavaScript code through the [JSHint validator](https://jshint.com/).
+* Python
+    * No errors were found when running the Python code through the [PEP8 online validator](http://pep8online.com/).
+* Accessibility
+    * A high level of accessibility was returned when Lighthouse was ran in Google Chrome developer tools
+
+![Database model](readme_images/database_model.png)
+
 
 
 ### Bugs
@@ -216,41 +212,32 @@ Automated tests were ran using the following command: <code>python3 manage.py te
     * **Resolution ✅** - This was resolved immediately in the next commit using the env.py file. This contained sensitive data not to be publicly accessible on GitHub and was withheld using the .gitignore file.
 
 ### Bugs
-* **Problem 🐞** - 
-    * **Resolution ✅** - 
+* **Problem 🐞** - When running automated tests models could not be accessed.
+    * **Resolution ✅** - Added an if statement to check if "test" was included in the cli command. If so, access the sqlite3 database, and if not access the dj_database_url database.
 
-
-### Bugs
-* **Problem 🐞** - 
-    * **Resolution ✅** - 
-
-
-### Bugs
-* **Problem 🐞** - 
-    * **Resolution ✅** - 
+```
+if 'test' in sys.argv:
+    #Configuration for test database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+  #Default configuration
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }"
+```
 
 
 
 ### Unfixed Bugs
-* 
+* No known bugs have been left unfixed
 
 
 ## Deployment
-### Heroku
-This app was created using the [python essentials template](https://github.com/Code-Institute-Org/python-essentials-template) developed by the Code Institute and the site was deployed to Heroku. The steps to deploy are as follows:
-1. From the user dashboard select 'Create New App'.
-1. Enter a unique app name and select the current region. This project was deployed from the UK, Europe.
-1. Once the skeleton of the app has been created, navigate to the 'Settings' tab.
-1. Click 'Reveal Config Vars' and type in "PORT" to the 'KEY' field and "8000" to the 'VALUE' field. Press Add to confirm.
-1. Click 'Add buildpack' and type in "heroku/python" and then click 'Save changes'. Alternatively click on the python icon to auto-fill the field with "heroku/python".
-1. Click 'Add buildpack' again and type in "heroku/nodejs" and then click 'Save changes'. Alternatively click on the nodejs icon to auto-fill the field with "heroku/nodejs".
-1. Ensure the order of the buildpacks starts with "heroku/python" and is followed by "heroku/nodejs".
-1. Navigate to the 'Deploy' tab in the app menu.
-1. Under the 'Deployment method' subsection select GitHub and click 'Connect to GitHub'.
-1. In the 'repo-name' field type the repository name and click search, and then below click 'Connect'. In this case the repo-name was "battleships".
-1. Under the 'Automatic deploys' subsection click 'Enable Automatic Deploys'.
-1. After the app has been deployed, click 'View' to open the deployed site in a new tab. Alternatively, scroll to the top of the app workspace and click 'Open app'.
-1. The live link can be found here - https://github.com/bens6477/battleships
 
 ### Cloning Repository
 You can clone this repository to view, edit and run the code. The steps to clone the repository are as follows:
@@ -258,8 +245,39 @@ You can clone this repository to view, edit and run the code. The steps to clone
 1. Within the repository, navigate to the 'Code' drop-down menu, select 'HTTP' and copy the URL.
 1. Open Git Bash from your IDE of choice.
 1. Navigate the current working directory to your desired location.
-1. To clone the repository, type <code>git clone</code> into the terminal followed by the repository URL, in this case <code>git clone https://github.com/bens6477/battleships</code>.
-1. Press 'Enter'.
+1. To clone the repository, type <code>git clone</code> into the terminal followed by the repository URL, in this case <code>git clone https://github.com/bens6477/exploring-unseen-blog</code>.
+1. Create an env.py file and add the following code. Create your own SECRET_KEY and get CLOUDINARY_URL from your Cloudinary account 
+```
+import os
+os.environ["CLOUDINARY_URL"] = "Enter CLOUDINARY_URL”
+os.environ["SECRET_KEY"] = "Enter SECRET_KEY"
+```
+1. Add env.py to .gitignore file to prevent this data from being added to the public domain on GitHub
+1. Install the required modules using <code>pip3 install -r requirements.txt</code>
+1. Add <code>DEVELOPMENT = True</code>
+1. To run the site use <code>python3 manage.py runserver</code>
+
+
+
+### Deployment to Heroku
+This app was created using the [python essentials template](https://github.com/Code-Institute-Org/python-essentials-template) developed by the Code Institute and the site was deployed to Heroku. The steps to deploy are as follows:
+1. From the user dashboard select 'Create New App'.
+1. Enter a unique app name and select the current region. This project was deployed from the UK, Europe.
+1. Once the skeleton of the app has been created, navigate to the 'Settings' tab.
+1. Add CLOUDINARY_URL and SECRET_KEY as config vars
+1. Click 'Add buildpack' and type in "Heroku/Postgres" and then click 'Save changes'.
+1. Add DATABASE_URL from Heroku config vars to env.py: <code>os.environ["DATABASE_URL"] = "DATABASE_URL”</code>
+1. Create a Procfile using <code>web: gunicorn [appname].wsgi:application</code>
+1. Create a requirements.txt file using <code>pip3 freeze --local > requirements.txt</code>
+1. Navigate to the 'Deploy' tab in the app menu.
+1. Under the 'Deployment method' subsection select GitHub and click 'Connect to GitHub'.
+1. In the 'repo-name' field type the repository name and click search, and then below click 'Connect'. In this case the repo-name was "battleships".
+1. Under the 'Automatic deploys' subsection click 'Enable Automatic Deploys'.
+1. Migrate changes using <code>python3 manage.py migrate</code>, commit and push code to GitHub.
+1. After the app has been deployed, click 'View' to open the deployed site in a new tab. Alternatively, scroll to the top of the app workspace and click 'Open app'.
+1. The live link can be found here - https://exploring-unseen.herokuapp.com/
+
+
 
 
 ## Credits
@@ -269,9 +287,7 @@ You can clone this repository to view, edit and run the code. The steps to clone
 
 ### Articles
 * [The Gorges of the Ardèche](https://www.avignon-et-provence.com/en/natural-sites/gorges-ardeche)
-* []()
-* []()
-* []()
-* []()
-* []()
+* [Fairy Pools](https://www.dunvegancastle.com/fairy-pools/)
+* [Stonehenge](https://www.nationalgeographic.com/history/article/stonehenge-1)
+* [Alhambra](https://www.alhambra.org/en/alhambra-history.html)
 
