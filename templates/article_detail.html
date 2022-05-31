@@ -9,15 +9,31 @@
     <div class="hero-overlay"> </div>
     <div class="hero-footer h1 text-center text-light">
         <h1>{{ article.attraction }}</h1>
-        <h2>{{ article.country }}</h2>
         <i class="fas fa-angle-down"></i>
-
-        <!-- Article image -->
-        
     </div>
 </div>
 
-<div class="container">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <article>
+                <!-- Article header details-->
+                <header class="mb-4">
+                    <h1 class="fw-bolder mb-1 text-center">{{ article.title }}</h1>
+                    <div class="row">
+                        <a class="badge text-decoration-none link-light mx-auto" href="/countries/{{ article.country }}"><h2>{{ article.country }}</h2></a>
+                    </div>
+                    <div class="text-muted fst-italic mb-2 text-center">Posted on {{ article.created_date|date:"j F, Y, g:i a" }} by {{ article.author }}</div>
+                    <hr>
+                </header>
+                <section class="mb-5">
+                    <!-- Article body -->
+                    <p>{{ article.content | safe }}</p>
+                </section>
+            </article>
+        </div>
+    </div>
+</div>
     <!-- Voting -->
     <!-- Upvote -->
     <div class="row">
