@@ -1,24 +1,3 @@
-# Explore Unseen Blog
-
-
-
-
-
-## Notes
-The first commit with django integration pushed a secret key to GitHub, however this was resolved immediately in the next commit using the env.py file. This contained sensitive data not to be publicly accessible on GitHub and was withheld using the .gitignore file.
-
-
-To Write About
-* Linear gradient background - also has the effect of dimming as user scrolls down
-https://codepen.io/kaustavbanerjee/pen/JKZPve
-
-* Add hero image through external javascript file using data-hero-page custom attribute and switch case logic. Inspiration from RPSLS and simon-game.
-
-
-
-
-
-
 # Exploring Unsen
 
 ## Site Overview
@@ -28,40 +7,6 @@ Sign up today to like, comment and share the experiences that others haven't see
 
 ![Site Overview](readme_images/home.png)
 
-
-## Contents
-1. [Site Overview](#site-overview)
-1. [Planning](#planning)
-    * [Target Audience](#target-audience)
-    * [User Stories](#user-stories)
-    * [Data Model](#data-model)
-    * [Flowcharts](#flowcharts)
-    * [Styling](#styling)
-1. [Features](#features)
-    * [Game Introduction](#game-introduction)
-    * [Defensive Design](#defensive-design)
-    * [User Name Input](#user-name-input)
-    * [Ship Placement](#ship-placement)
-    * [Valid User Guess](#valid-user-guess)
-    * [Randomised Computer Guess](#randomised-computer-guess)
-    * [Shot Outcome](#shot-outcome)
-    * [Game Winner](#game-winner)
-    * [Play Again](#play-again)
-1. [Future Enhancements](#future-enhancements)
-1. [Technology Used](#technology-used)
-1. [Libraries](#libraries)
-    * [random](#random)
-    * [os](#os)
-    * [copy](#copy)
-1. [Testing](#testing)
-    * [Functionality Testing](#functionality-testing)
-    * [Validator Testing](#validator-testing)
-    * [Bugs](#bugs)
-    * [Unfixed Bugs](#unfixed-bugs)
-1. [Deployment](#deployment)
-    * [Heroku](#heroku)
-    * [Cloning Repository](#cloning-repository)
-1. [Credits](#credits)
 
 ## Planning
 
@@ -138,14 +83,18 @@ Several wireframes were made prior to building the website to plan the desired l
 
 
 ## Features
+* Filter articles by country
+* Upvote / Downvote articles
+* Leave a comment
+* Register an account
+* Sign In
+* Sign Out
 
-###
 
-### User Permissions
+## User Permissions
 * Only the article author or superusers (admins) can edit / delete each article. Achieved through <code>{% if user == article.author or user.is_superuser %}</code>
 * Only superusers can edit / delete countries. Since other articles rely on countries and deleting countries cascade deletes articles, this functionality is restricted to admins only.
 * Any authenticated user can add a new country and add a new article, as creating new data does not affect current data in the database.
-
 
 
 ## Future Enhancements
@@ -258,7 +207,6 @@ os.environ["SECRET_KEY"] = "Enter SECRET_KEY"
 1. To run the site use <code>python3 manage.py runserver</code>
 
 
-
 ### Deployment to Heroku
 This app was created using the [python essentials template](https://github.com/Code-Institute-Org/python-essentials-template) developed by the Code Institute and the site was deployed to Heroku. The steps to deploy are as follows:
 1. From the user dashboard select 'Create New App'.
@@ -284,6 +232,7 @@ This app was created using the [python essentials template](https://github.com/C
 * [Django Documentation](https://docs.djangoproject.com/en/3.2/)
 * Cloudinary documentation including [installation](https://cloudinary.com/documentation/django_image_and_video_upload)
 * Summernote documentation including [installation](https://summernote.org/getting-started/#installation)
+* [Linear gradient background](https://codepen.io/kaustavbanerjee/pen/JKZPve)
 
 ### Articles
 * [The Gorges of the Ardèche](https://www.avignon-et-provence.com/en/natural-sites/gorges-ardeche)
