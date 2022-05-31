@@ -154,7 +154,7 @@ Automated tests were ran using the following command: <code>python3 manage.py te
 * Accessibility
     * A high level of accessibility was returned when Lighthouse was ran in Google Chrome developer tools
 
-![Database model](readme_images/database_model.png)
+![Database model](readme_images/accessibility.png)
 
 
 
