@@ -2,11 +2,12 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="Description" content="Enter your description here"/>
+    <meta name="Description" content="Enter your description here" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -48,7 +49,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-8 offset-md-2 mt-5">
                 {% for message in messages %}
                 <div id="msg" class="alert {{ message.tags }} alert-dismissable fade show" role="alert">
                     {{ message | safe }}
@@ -62,9 +63,15 @@
     {% block content %}
     <!-- Content from other files inserted here -->
     {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="blog-footer bg-light text-center">
+        <p>Copyright &copy; Exploring Unseen 2022</p>
+    </footer>
 
     <script>
-        setTimeout(function() {
+        setTimeout(function () {
             let messages = document.getElementById("msg");
             let alert = new bootstrap.Alert(messages);
             alert.close();

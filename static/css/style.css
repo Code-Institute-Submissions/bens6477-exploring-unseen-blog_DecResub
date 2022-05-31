@@ -63,3 +63,10 @@
 #vote-count {
     margin-bottom: 0;
 }
+
+/* Footer */
+.blog-footer {
+    width: 100%;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+}

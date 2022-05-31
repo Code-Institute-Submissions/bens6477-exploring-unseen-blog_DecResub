@@ -101,12 +101,11 @@
                     {% else %}
                     
                     {% if user.is_authenticated %}
-                    <h3>Add a comment:</h3>
-                    <p>Posting as: {{ user.username }}</p>
+                    <h3>Have your say...</h3>
                     <form method="post">
                         {{ comment_form | crispy }}
                         {% csrf_token %}
-                        <button type="submit">Submit</button>
+                        <button type="submit">Post Comment</button>
                     </form>
                     {% endif %}
                     {% endif %}
