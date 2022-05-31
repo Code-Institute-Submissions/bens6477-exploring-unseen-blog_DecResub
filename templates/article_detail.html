@@ -5,7 +5,7 @@
 
 
 <!-- Hero image container -->
-<div id="article-hero" data-hero-page="article" class="container-fluid hero-container">
+<div id="article-hero" style="background-image: url('{{ article.image.url }}');" class="container-fluid hero-container">
     <div class="hero-overlay"> </div>
     <div class="hero-footer h1 text-center text-light">
         <h1>{{ article.attraction }}</h1>
@@ -13,11 +13,6 @@
         <i class="fas fa-angle-down"></i>
 
         <!-- Article image -->
-        {% if "default_image" in article.image.url %}
-        <script type="text/javascript">
-            document.getElementById("article-hero").style.backgroundImage = "url('')";
-        </script>
-        {% endif %}
         
     </div>
 </div>
