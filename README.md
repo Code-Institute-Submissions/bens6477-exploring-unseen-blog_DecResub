@@ -1,24 +1,6 @@
 # Explore Unseen Blog
 
-## Planning
 
-### Agile Approach
-This project was implemented using an Agile approach to take advantage of the iterative and incremental development.
-
-A key advantage of this approach was the iterative and incremental development, which created a highly adaptable and efficient work schedule. Tasks were completed in stages to fulfil user stories, which incrementally improved the functionality of the website. The project was split into two-day iterations, to review progress and adjust the work schedule accordingly.
-
-Jira was used to organise the project tasks and timeline. A kanban board was used to move user stories across To Do, In Progress and Done columns according to their status.
-
-The project board can be viewed [here](https://bens6477.atlassian.net/jira/software/projects/EUB/boards/1).
-
-Epics were refined into User Stories and further split into specific Tasks to complete.
-
-
-### Wireframes
-
-Several wireframes were made prior to building the website to plan the desired layout and functionality.
-
-*** IMAGES ***
 
 
 
@@ -82,12 +64,25 @@ This app is a simple, fast-paced app which you can play against the computer in 
     * [Cloning Repository](#cloning-repository)
 1. [Credits](#credits)
 
-
 ## Planning
+
+### Agile Approach
+This project was implemented using an Agile approach to take advantage of the iterative and incremental development.
+
+A key advantage of this approach was the iterative and incremental development, which created a highly adaptable and efficient work schedule. Tasks were completed in stages to fulfil user stories, which incrementally improved the functionality of the website. The project was split into two-day iterations, to review progress and adjust the work schedule accordingly.
+
+Jira was used to organise the project tasks and timeline. A kanban board was used to move user stories across To Do, In Progress and Done columns according to their status.
+
+The project board can be viewed [here](https://bens6477.atlassian.net/jira/software/projects/EUB/boards/1).
+
+Epics were refined into User Stories and further split into specific Tasks to complete.
+
+
 ### Target Audience
 * Users who wish to explore new places and attractions.
 * Users who are looking to engage in an interactive community of travelers.
 * Users who are looking share their traveling highlights favourite places.
+
 
 ### User Stories
 As a user, I want:
@@ -100,6 +95,19 @@ As a user, I want:
 * To easily reset the game to play again as many times as desired.
 
 
+### Wireframes
+
+Several wireframes were made prior to building the website to plan the desired layout and functionality.
+
+![Wireframe home](readme_images/wireframe_home.png)
+![Wireframe countries](readme_images/wireframe_countries.png)
+![Wireframe article top](readme_images/wireframe_article_top.png)
+![Wireframe article bottom](readme_images/wireframe_article_bottom.png)
+![Wireframe sign up](readme_images/wireframe_signup.png)
+![Wireframe sign in](readme_images/wireframe_signin.png)
+![Wireframe sign out](readme_images/wireframe_signout.png)
+
+
 ### Data Model
 * This project used Object Oriented programming, utilising model classes to define data.
 * PostgreSQL was used to create a relational database of objects
@@ -108,15 +116,6 @@ As a user, I want:
 * Foreign key fields were used to reference objects in different tables
 
 ![Database model](readme_images/database_model.png)
-
-
-
-### Flowcharts
-* Flowcharts were created to plan the logic and feature paths of the game, and to organise the content into actionable sections.
-
-[View image in new tab:](https://raw.githubusercontent.com/bens6477/battleships/main/assets/images/logic-flowchart.png)
-
-![Logic Flowchart](assets/images/logic-flowchart.png)
 
 
 ### Styling
@@ -210,14 +209,8 @@ Automated tests were ran using the following command: <code>python3 manage.py te
 
 
 
-
-
-
-
 ### Unfixed Bugs
 * 
-
-
 
 
 ## Deployment
@@ -248,4 +241,6 @@ You can clone this repository to view, edit and run the code. The steps to clone
 
 
 ## Credits
-* 
+* [Django Documentation](https://docs.djangoproject.com/en/3.2/)
+* Cloudinary documentation including [installation](https://cloudinary.com/documentation/django_image_and_video_upload)
+* Summernote documentation including [installation](https://summernote.org/getting-started/#installation)

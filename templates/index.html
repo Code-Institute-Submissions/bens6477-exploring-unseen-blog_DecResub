@@ -24,10 +24,9 @@
         <div class="col-12 mt-3 left">
             <div class="row">
             {% for article in article_list %}
-                <div class="col-md-4">
+                <div class="card-group col-md-4 mb-4">
                     <div class="card">
                         <!-- Article image -->
-                        {{ article.image.url }}
                         {% if "placeholder" in article.image.url %}
                         <a href="/article/view/{{ article.id }}"><img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Article image" /></a>
                         {% else %}
@@ -42,14 +41,6 @@
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">{{ article.updated_date }}</small>
-                            <!-- User voting -->
-                            <span>
-                                <!-- Upvote -->
-                                <i class="fas fa-arrow-alt-circle-up"></i>
-                                <span> {{ article.vote_count }} </span>
-                                <!-- Downvote -->
-                                <i class="fas fa-arrow-alt-circle-down"></i>
-                            </span>
                         </div>
                     </div>
                 </div>
