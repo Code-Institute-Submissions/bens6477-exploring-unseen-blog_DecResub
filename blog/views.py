@@ -7,6 +7,9 @@ from .forms import ArticleForm, CountryForm, CommentForm
 
 
 class ArticleList(generic.ListView):
+    """
+    Gets a list of all approved articles
+    """
     model = Article
     queryset = Article.objects.filter(approved=True).order_by('-created_date')
     template_name = 'index.html'
@@ -14,7 +17,14 @@ class ArticleList(generic.ListView):
 
 
 class ArticleDetail(View):
+    """
+    Handles methods concerning a specific article by filtering by its slug.
+    """
     def get(self, request, slug, *args, **kwargs):
+        """
+        Gets a specific article by filtering by its slug and returns
+        whether the user has up/downvoted article
+        """
         queryset = Article.objects.filter(approved=True)
         article = get_object_or_404(queryset, slug=slug)
         comments = article.comments.filter(approved=True).order_by('created_on')
@@ -38,6 +48,9 @@ class ArticleDetail(View):
         )
     
     def post(self, request, slug, *args, **kwargs):
+        """
+        Posts user comments to a specific article by filtering by its slug
+        """
         queryset = Article.objects.filter(approved=True)
         article = get_object_or_404(queryset, slug=slug)
         comments = article.comments.filter(approved=True).order_by('created_on')
@@ -74,7 +87,13 @@ class ArticleDetail(View):
 
 
 class ArticleAdd(View):
-    def get(self, request, country_name):        
+    """
+    Adds new article
+    """
+    def get(self, request, country_name):
+        """
+        Renders add_article template and creates a new article form
+        """
         country = get_object_or_404(Country, country_name=country_name)
         articles = list(Article.objects.all())
         form = ArticleForm()
@@ -82,6 +101,9 @@ class ArticleAdd(View):
         return render(request, "add_article.html", context)
 
     def post(self, request, country_name):
+        """
+        Renders add_article template and edits a specified article form
+        """
         country = get_object_or_404(Country, country_name=country_name)
         articles = list(Article.objects.all())
         form = ArticleForm(request.POST, request.FILES)
@@ -124,7 +146,13 @@ class ArticleAdd(View):
 
 
 class ArticleEdit(View):
+    """
+    Edits specified article
+    """
     def get(self, request, slug):
+        """
+        Renders edit_article template and edits a specified article form
+        """
         article = get_object_or_404(Article, slug=slug)
         articles = list(Article.objects.all())
         form = ArticleForm(instance=article)
@@ -136,6 +164,9 @@ class ArticleEdit(View):
         return render(request, "edit_article.html", context)
 
     def post(self, request, slug):
+        """
+        Renders edit_article template and posts a specified article form
+        """
         article = get_object_or_404(Article, slug=slug)
         country_name = article.country
         country = get_object_or_404(Country, country_name=country_name)
@@ -170,7 +201,13 @@ class ArticleEdit(View):
 
 
 class ArticleDelete(View):
+    """
+    Deletes a specified article
+    """
     def get(self, request, slug):
+        """
+        Deletes a specified article
+        """
         article = get_object_or_404(Article, slug=slug)
         country_name = article.country
         articles = list(Article.objects.all())
@@ -186,7 +223,13 @@ class ArticleDelete(View):
 
 
 class ArticleUpvote(View):
+    """
+    Upvotes specified article
+    """
     def post(self, request, slug):
+        """
+        Upvotes specified article
+        """
         article = get_object_or_404(Article, slug=slug)
         if article.upvotes.filter(id=request.user.id).exists():
             article.upvotes.remove(request.user)
@@ -199,7 +242,13 @@ class ArticleUpvote(View):
 
 
 class ArticleDownvote(View):
+    """
+    Downvotes specified article
+    """
     def post(self, request, slug):
+        """
+        Downvotes specified article
+        """
         article = get_object_or_404(Article, slug=slug)
         if article.downvotes.filter(id=request.user.id).exists():
             article.downvotes.remove(request.user)
@@ -212,14 +261,26 @@ class ArticleDownvote(View):
 
 
 class Countries(View):
+    """
+    Gets a list of all approved articles
+    """
     def get(self, request):
+        """
+        Gets a list of all approved articles then renders countries page
+        """
         countries = Country.objects.all().filter(approve_country=True)
         context = {'countries': countries}
         return render(request, 'countries.html', context)
 
 
 class CountryArticles(View):
+    """
+    Gets a list of all approved articles for specified country
+    """
     def get(self, request, country_name, *args, **kwargs):
+        """
+        Gets a list of all approved articles for specified country
+        """
         queryset = Article.objects.all().filter(approved=True, country__country_name=country_name)
         articles = get_list_or_404(queryset)
         return render(
@@ -233,13 +294,22 @@ class CountryArticles(View):
 
 
 class CountryAdd(View):
+    """
+    Adds new country
+    """
     def get(self, request):
+        """
+        Renders add_country template and adds a new country form
+        """
         countries = list(Country.objects.all())
         form = CountryForm()
         context = {"form": form}
         return render(request, "add_country.html", context)
         
     def post(self, request):
+        """
+        Renders add_country template and posts a new country form
+        """
         countries = list(Country.objects.all())
         form = CountryForm(request.POST)
         if form.is_valid():
@@ -265,7 +335,13 @@ class CountryAdd(View):
 
 
 class CountryEdit(View):
+    """
+    Edits new country
+    """
     def get(self, request, country_name):
+        """
+        Renders edit_country template and adds a new country form
+        """
         country = get_object_or_404(Country, country_name=country_name)
         countries = list(Country.objects.all())
         form = CountryForm(instance=country)
@@ -273,6 +349,9 @@ class CountryEdit(View):
         return render(request, "edit_country.html", context)
         
     def post(self, request, country_name):
+        """
+        Renders edit_country template and edits a specified country form
+        """
         country = get_object_or_404(Country, country_name=country_name)
         countries = list(Country.objects.all())
         form = CountryForm(request.POST, instance=country)
@@ -298,7 +377,13 @@ class CountryEdit(View):
 
 
 class CountryDelete(View):
+    """
+    Deletes a specified country
+    """
     def get(self, request, country_name):
+        """
+        Deletes a specified country
+        """
         country = get_object_or_404(Country, country_name=country_name)
         country.delete()
         return redirect('countries')

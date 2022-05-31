@@ -37,7 +37,7 @@
                             <a href="{% url 'article_detail' article.slug %}">
                                 <h5 class="card-title">{{ article.title }}</h5>
                                 <p class="card-text">{{ article.summary }}</p>
-                                {% if user.is_authenticated %}
+                                {% if user == article.author or user.is_superuser %}
                                 <div class="mt-4">
                                     <a class="btn btn-info" href="{% url 'edit_article' article.slug %}">Edit Article</a>
                                     <a class="btn btn-danger float-right" href="{% url 'delete_article' article.slug %}">Delete Article</a>

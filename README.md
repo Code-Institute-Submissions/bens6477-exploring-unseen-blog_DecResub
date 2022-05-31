@@ -134,6 +134,10 @@ Colour dependent data is as follows:
 
 ###
 
+### User Permissions
+* Only the article author or superusers (admins) can edit / delete each article. Achieved through <code>{% if user == article.author or user.is_superuser %}</code>
+* Only superusers can edit / delete countries. Since other articles rely on countries and deleting countries cascade deletes articles, this functionality is restricted to admins only.
+* Any authenticated user can add a new country and add a new article, as creating new data does not affect current data in the database.
 
 
 
@@ -153,8 +157,6 @@ Various additional features would bring a greater user experience to the website
 * [Cloudinary ]() - Permanent location for storing images on the cloud 
 * [Bootstrap]() - Website structure and styling
 * [jQuery]() - Interactivity through bootsrtap scripts
-
-
 * [Heroku](https://www.heroku.com/home) - Site deployment
 * [Font Awesome](https://fontawesome.com/v5.15/icons/) - Arrow icons
 * [GitPod](https://www.gitpod.io/) - IDE for local development

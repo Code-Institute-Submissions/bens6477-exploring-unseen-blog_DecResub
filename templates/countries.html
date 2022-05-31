@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <a href="{% url 'country_articles' country.country_name %}">
                                 <h5 class="card-title text-center">{{ country.country_name }}</h5>
-                                {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
                                 <a class="btn btn-info" href="{% url 'edit_country' country.country_name %}">Edit Country</a>
                                 <a class="btn btn-danger float-right" href="{% url 'delete_country' country.country_name %}">Delete Country</a>
                                 {% endif %}
