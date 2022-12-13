@@ -11,7 +11,7 @@
 <div id="home-hero" data-hero-page="login" class="home-hero container-fluid hero-container">
   <div class="jumbotron">
     <div class="row">
-      <div class="col-md-8 mt-3 offset-md-2">
+      <div class="col-md-8 offset-md-2">
         <h3>{% trans "Sign In" %}</h3>
         <p>{% blocktrans %}If you have not created an account yet, then please
           <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
@@ -26,7 +26,9 @@
           {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
-          <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+          <div class="mt-4">
+            <button class="primaryAction btn btn-primary content-width mx-auto" type="submit">{% trans "Sign In" %}</button>
+          </div>
         </form>
       </div>
     </div>

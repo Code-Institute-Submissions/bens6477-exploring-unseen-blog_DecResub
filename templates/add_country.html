@@ -1,36 +1,31 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% block content %}
 
-<div class="container">
-  <!-- Message alerts for authentication, articles awaiting approval and errors -->
-  <div class="row">
-    <div class="col-6 offset-3 pt-3">
-      {% for message in messages %}
-      <div role="alert" id="msg" class="alert alert-dismissible fade show {{ message.tags }}">
-        {{ message | safe }}
-        <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-  <!-- Title -->
-  <div class="row pt-3">
-    <h1 class="center-text">Add Country</h1>
-  </div>
-  <!-- Category details to add -->
-  <div class="row mx-auto">
-    <div class="col-md-4 offset-md-4 col-12">
-      <form action="{{ blog.views.add_country }}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- Category name -->
-        <div class="row">Country Name:</div>
-        <div class="row">{{ form.country_name }}</div>
-        <div class="row pt-4">
-          <button class="btn btn-primary content-width mx-auto" type="submit">Add Country</button>
+
+<!-- Hero image container -->
+<div id="home-hero" data-hero-page="login" class="home-hero container-fluid hero-container">
+    <div class="jumbotron">
+        <!-- Title -->
+        <div class="row">
+            <div class="col-12 col-md-8 offset-md-2">
+                <h3>Add Country</h3>
+            </div>
         </div>
-      </form>
+        <!-- Category details to add -->
+        <div class="row">
+            <div class="col-12 col-md-8 offset-md-2 mt-3">
+                <form action="{{ blog.views.add_country }}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Category name -->
+                    <div>Country Name:</div>
+                    <div>{{ form.country_name }}</div>
+                    <div class="mt-4">
+                        <button class="btn btn-primary content-width mx-auto" type="submit">Add Country</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 {% endblock %}
