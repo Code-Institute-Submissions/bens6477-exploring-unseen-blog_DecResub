@@ -51,6 +51,19 @@
     margin-bottom: -2rem;
 }
 
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: 10vw;
+    z-index: 99999999999;
+    min-width: 80vw;
+    text-align: center;
+}
+
+.custom-toast {
+    overflow: visible;
+}
+
 
 /* Bootstrap Cards */
 .card-img-top {
