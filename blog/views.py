@@ -282,7 +282,6 @@ class CountryArticles(View):
         Gets a list of all approved articles for specified country
         """
         queryset = Article.objects.all().filter(approved=True, country__country_name=country_name)
-        print(queryset.count())
         if queryset.count() > 0:
             articles = get_list_or_404(queryset)
             return render(

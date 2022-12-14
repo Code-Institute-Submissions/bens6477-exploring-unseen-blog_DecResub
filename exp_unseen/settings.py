@@ -98,6 +98,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
@@ -111,7 +115,6 @@ WSGI_APPLICATION = 'exp_unseen.wsgi.application'
 
 if ('test' in sys.argv) or os.path.isfile('env.py'):
     #Configuration for test database
-    print('test or dev')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

@@ -16,9 +16,12 @@
             <div class="col-12 col-md-8 offset-md-2 mt-3">
                 <form action="{{ blog.views.add_country }}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <!-- Category name -->
-                    <div>Country Name:</div>
-                    <div>{{ form.country_name }}</div>
+                    <div id="div_country_name" class="control-group mt-3">
+                        <div class="controls">
+                          <input type="text" name="country_name" placeholder="Country Name*" autocomplete="country_name" maxlength="150" class="textinput textInput" required id="country_name">
+                        </div>
+                    </div>
+
                     <div class="mt-4">
                         <button class="btn btn-primary content-width mx-auto" type="submit">Add Country</button>
                     </div>
