@@ -28,9 +28,9 @@
                     <div class="card">
                         <!-- Article image -->
                         {% if "placeholder" in article.image.url %}
-                        <a href="/article/view/{{ article.id }}"><img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Article image" /></a>
+                        <a href="/article/view/{{ article.id }}"><img class="card-img-top" src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Article image"></a>
                         {% else %}
-                        <a href="/article/view/{{ article.id }}"><img class="card-img-top" src="{{ article.image.url }}" alt="Article image" /></a>
+                        <a href="/article/view/{{ article.id }}"><img class="card-img-top" src="{{ article.image.url }}" alt="Article image"></a>
                         {% endif %}
                         <!-- Article content -->
                         <div class="card-body">
