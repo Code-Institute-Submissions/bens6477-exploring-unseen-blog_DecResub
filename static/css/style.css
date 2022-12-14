@@ -1,6 +1,6 @@
 /* Hero container */
 .hero-container {
-    height: 100vh;
+    min-height: 100vh;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
