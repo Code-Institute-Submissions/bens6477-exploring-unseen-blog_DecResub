@@ -1,57 +1,52 @@
 {% extends "base.html" %} 
 {% block content %}
 
-<div class="container">
-  <!-- Message alerts for authentication, articles awaiting approval and errors -->
-  <div class="row">
-    <div class="col-6 offset-3 pt-3">
-      {% for message in messages %}
-      <div role="alert" id="msg" class="alert alert-dismissible fade show {{ message.tags }}">
-        {{ message | safe }}
-        <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-  <!-- Title -->
-  <div class="row pt-3">
-    <h1 class="center-text">Edit Article</h1>
-  </div>
-  <!-- Article details to edit -->
-  <div class="row mx-auto">
-    <div class="col-12 col-md-8 offset-md-2">
-      <form action="{{ blog.views.edit_article }}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- Article Title -->
-        <div class="row pt-3">Title:</div>
-        <div class="row">{{ form.title }}</div>
-        <!-- Article Attraction -->
-        <div class="row pt-3">Attraction:</div>
-        <div class="row">
-          <textarea name="attraction" cols="40" rows="10" maxlength="150" required="" id="id_attraction" class="article-attraction">{{ form.attraction.value }}</textarea>
-        </div>
-        <!-- Article Summary -->
-        <div class="row pt-3">Summary:</div>
-        <div class="row">
-          <textarea name="summary" cols="40" rows="10" maxlength="150" required="" id="id_summary" class="article-summary">{{ form.summary.value }}</textarea>
-        </div>
-        <!-- Image -->
-        <div class="row pt-3">Image:</div>
-        <div class="row pt-0 pb-3 ps-0 me-0">
-          <div>
-            {{ form.image }}
+<!-- Hero image container -->
+<div id="home-hero" data-hero-page="login" class="home-hero container-fluid hero-container mt-3 mb-1">
+  <div class="jumbotron mt-3 mb-1">
+      <!-- Title -->
+      <div class="row">
+          <div class="col-12 col-md-8 offset-md-2">
+              <h3>Edit Article</h3>
           </div>
-        </div>
-        <!-- Article Content -->
-        <div class="row pt-3">Article Content:</div>
-        <div class="row">
-          <textarea id="summernote" name="editordata">{{ article.content | safe }}</textarea>
-        </div>
-        <div class="row pt-3">
-          <button class="btn btn-primary content-width mx-auto" type="submit">Update Article</button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <!-- Article details to update -->
+      <div class="row mx-auto">
+          <div class="col-12 col-md-8 offset-md-2">
+              <form action="{{ blog.views.edit_article }}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <!-- Article Title -->
+                  <div class="row mt-3 mb-1">Title:</div>
+                  <div class="row">{{ form.title }}</div>
+                  <!-- Article Attraction -->
+                  <div class="row mt-3 mb-1">Attraction:</div>
+                  <div class="row">{{ form.attraction }}</div>
+                  <!-- Article Summary -->
+                  <div class="row mt-3 mb-1">Summary:</div>
+                  <div class="row">
+                      <textarea name="summary" cols="40" rows="10" maxlength="150" required="" id="id_summary"
+                          class="article-summary">{{ form.summary.value }}</textarea>
+                  </div>
+
+                  <!-- Image -->
+                  <div class="row mt-3 mb-1">Image:</div>
+                  <div class="row pt-0 pb-3 ps-0 me-0">
+                      <div>
+                          {{ form.image }}
+                      </div>
+                  </div>
+                  <!-- Article Content -->
+                  <div class="row mt-3 mb-1">Article Content:</div>
+                  <div class="row">
+                      <textarea id="summernote" name="editordata"></textarea>
+                  </div>
+                  <p class="text-center"><i class="fas fa-angle-down"></i> Drag bar down to expand article content area <i class="fas fa-angle-down"></i></p>
+                  <div class="row mt-5 mb-1">
+                      <button class="btn btn-primary content-width mx-auto" type="submit">Update Article</button>
+                  </div>
+              </form>
+          </div>
+      </div>
   </div>
 </div>
 
