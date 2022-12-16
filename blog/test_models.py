@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from unittest.mock import patch
 from .models import Article, Country
 
 
@@ -19,7 +18,7 @@ class TestModels(TestCase):
             summary='Summary',
             content='Content')
         self.assertFalse(self.article.approved)
-    
+
     def test_article_string_method_returns_title(self):
         self.user = User.objects.create(username='fake')
         self.country = Country.objects.create(

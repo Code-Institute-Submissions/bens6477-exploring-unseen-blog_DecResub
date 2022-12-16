@@ -114,7 +114,6 @@ WSGI_APPLICATION = 'exp_unseen.wsgi.application'
 
 
 if ('test' in sys.argv) or os.path.isfile('env.py'):
-    #Configuration for test database
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -122,7 +121,6 @@ if ('test' in sys.argv) or os.path.isfile('env.py'):
         }
     }
 else:
-    #Default configuration
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }

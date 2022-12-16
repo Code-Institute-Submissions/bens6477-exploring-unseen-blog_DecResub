@@ -9,7 +9,7 @@ class TestViews(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
-    
+
     def test_get_country_articles_page(self):
         user = User.objects.create(username='fake')
         country = Country.objects.create(
@@ -26,17 +26,11 @@ class TestViews(TestCase):
         response = self.client.get(f'/countries/{country.country_name}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'country_articles.html')
-    
+
     def test_get_country_page(self):
         response = self.client.get('/countries/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'countries.html')
-    
-    # def test_get_add_country_page(self):
-    #     pass
-    
-    # def test_get_edit_country_page(self):
-    #     pass
 
     def test_get_article_detail_page(self):
         user = User.objects.create(username='fake')
@@ -54,9 +48,3 @@ class TestViews(TestCase):
         response = self.client.get(f'/{article.slug}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'article_detail.html')
-    
-    # def test_get_add_article_page(self):
-    #     pass
-    
-    # def test_get_edit_article_page(self):
-    #     pass

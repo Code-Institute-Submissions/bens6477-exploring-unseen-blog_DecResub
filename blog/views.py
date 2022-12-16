@@ -1,6 +1,8 @@
-from django.shortcuts import render, reverse, redirect, get_object_or_404, get_list_or_404
+from django.shortcuts import (
+    render, reverse, redirect, get_object_or_404, get_list_or_404
+)
 from django.views import generic, View
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .models import Article, Country
 from .forms import ArticleForm, CountryForm, CommentForm
@@ -27,7 +29,8 @@ class ArticleDetail(View):
         """
         queryset = Article.objects.filter(approved=True)
         article = get_object_or_404(queryset, slug=slug)
-        comments = article.comments.filter(approved=True).order_by('created_on')
+        approved_comments = article.comments.filter(approved=True)
+        comments = approved_comments.order_by('created_on')
         upvoted = False
         if article.upvotes.filter(id=self.request.user.id).exists():
             upvoted = True
@@ -46,14 +49,15 @@ class ArticleDetail(View):
                 "comment_form": CommentForm(),
             }
         )
-    
+
     def post(self, request, slug, *args, **kwargs):
         """
         Posts user comments to a specific article by filtering by its slug
         """
         queryset = Article.objects.filter(approved=True)
         article = get_object_or_404(queryset, slug=slug)
-        comments = article.comments.filter(approved=True).order_by('created_on')
+        approved_comments = article.comments.filter(approved=True)
+        comments = approved_comments.order_by('created_on')
         upvoted = False
         if article.upvotes.filter(id=self.request.user.id).exists():
             upvoted = True
@@ -71,7 +75,7 @@ class ArticleDetail(View):
             comment.save()
         else:
             comment_form = CommentForm()
-        
+
         return render(
             request,
             "article_detail.html",
@@ -94,8 +98,6 @@ class ArticleAdd(View):
         """
         Renders add_article template and creates a new article form
         """
-        country = get_object_or_404(Country, country_name=country_name)
-        articles = list(Article.objects.all())
         form = ArticleForm()
         context = {"form": form}
         return render(request, "add_article.html", context)
@@ -131,16 +133,11 @@ class ArticleAdd(View):
             messages.add_message(
                 request, messages.INFO, "Your article is awaiting approval"
             )
-            queryset = Article.objects.all().filter(approved=True, country__country_name=country_name)
+            full_queryset = Article.objects.all()
+            queryset = full_queryset.filter(approved=True,
+                                            country__country_name=country_name)
             article_queryset = get_list_or_404(queryset)
-            return render(
-                request,
-                "country_articles.html",
-                {
-                    "articles": article_queryset,
-                    "country_name": country
-                }   
-            )
+            return HttpResponseRedirect(reverse('country_articles', args=[country_name]))
         context = {"form": form}
         return render(request, "add_article.html", context)
 
@@ -154,7 +151,6 @@ class ArticleEdit(View):
         Renders edit_article template and edits a specified article form
         """
         article = get_object_or_404(Article, slug=slug)
-        articles = list(Article.objects.all())
         form = ArticleForm(instance=article)
         context = {
             "form": form,
@@ -182,16 +178,11 @@ class ArticleEdit(View):
             form.instance.summary = request.POST.get("summary")
             form.instance.slug = form.instance.title.replace(" ", "-").lower()
             form.save()
-            queryset = Article.objects.all().filter(approved=True, country__country_name=country_name)
+            full_queryset = Article.objects.all()
+            queryset = full_queryset.filter(approved=True,
+                                            country__country_name=country_name)
             article_queryset = get_list_or_404(queryset)
-            return render(
-                request,
-                "country_articles.html",
-                {
-                    "articles": article_queryset,
-                    "country_name": country
-                }   
-            )
+            return HttpResponseRedirect(reverse('country_articles', args=[country_name]))
         context = {
             "form": form,
             "article": article,
@@ -210,16 +201,10 @@ class ArticleDelete(View):
         """
         article = get_object_or_404(Article, slug=slug)
         country_name = article.country
+        country = get_object_or_404(Country, country_name=country_name)
         articles = list(Article.objects.all())
         article.delete()
-        return render(
-            request,
-            "country_articles.html",
-            {
-                "articles": articles,
-                "country_name": country
-            }   
-        )
+        return HttpResponseRedirect(reverse('country_articles', args=[country_name]))
 
 
 class ArticleUpvote(View):
@@ -237,7 +222,7 @@ class ArticleUpvote(View):
             article.upvotes.add(request.user)
             if article.downvotes.filter(id=request.user.id).exists():
                 article.downvotes.remove(request.user)
-        
+
         return HttpResponseRedirect(reverse('article_detail', args=[slug]))
 
 
@@ -256,7 +241,7 @@ class ArticleDownvote(View):
             article.downvotes.add(request.user)
             if article.upvotes.filter(id=request.user.id).exists():
                 article.upvotes.remove(request.user)
-        
+
         return HttpResponseRedirect(reverse('article_detail', args=[slug]))
 
 
@@ -281,7 +266,9 @@ class CountryArticles(View):
         """
         Gets a list of all approved articles for specified country
         """
-        queryset = Article.objects.all().filter(approved=True, country__country_name=country_name)
+        full_queryset = Article.objects.all()
+        queryset = full_queryset.filter(approved=True,
+                                        country__country_name=country_name)
         if queryset.count() > 0:
             articles = get_list_or_404(queryset)
             return render(
@@ -290,7 +277,7 @@ class CountryArticles(View):
                 {
                     "articles": articles,
                     "country_name": country_name
-                }   
+                }
             )
         else:
             return HttpResponseRedirect(reverse('countries'))
@@ -308,7 +295,7 @@ class CountryAdd(View):
         form = CountryForm()
         context = {"form": form}
         return render(request, "add_country.html", context)
-        
+
     def post(self, request):
         """
         Renders add_country template and posts a new country form
@@ -332,7 +319,7 @@ class CountryAdd(View):
                 request, messages.INFO, "Your country is awaiting approval"
             )
             return redirect("countries")
-        
+
         context = {"form": form}
         return render(request, "add_country.html", context)
 
@@ -350,7 +337,7 @@ class CountryEdit(View):
         form = CountryForm(instance=country)
         context = {"form": form}
         return render(request, "edit_country.html", context)
-        
+
     def post(self, request, country_name):
         """
         Renders edit_country template and edits a specified country form
@@ -371,10 +358,10 @@ class CountryEdit(View):
                     return render(request, "edit_country.html", context)
             form.save()
             messages.add_message(
-                request, messages.INFO, "Your country is awaiting approval"
+                request, messages.INFO, "Your country name has been updated."
             )
             return redirect("countries")
-        
+
         context = {"form": form}
         return render(request, "edit_country.html", context)
 

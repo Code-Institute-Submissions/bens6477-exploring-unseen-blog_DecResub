@@ -20,7 +20,8 @@ class Article(models.Model):
     """
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    attraction = models.CharField(max_length=200, unique=True, default="Attraction")
+    attraction = models.CharField(max_length=200,
+                                  unique=True, default="Attraction")
     country = models.ForeignKey(Country, on_delete=models.CASCADE, default="")
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_articles")
@@ -55,7 +56,8 @@ class Comment(models.Model):
     """
     Model for creating article comments.
     """
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")
+    article = models.ForeignKey(Article, on_delete=models.CASCADE,
+                                related_name="comments")
     user_name = models.ForeignKey(User, on_delete=models.CASCADE)
     email = models.EmailField(default="")
     created_on = models.DateTimeField(auto_now_add=True)
