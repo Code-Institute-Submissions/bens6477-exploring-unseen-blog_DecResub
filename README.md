@@ -144,17 +144,17 @@ Automated tests were ran using the following command: <code>python3 manage.py te
 
 ### Validator Testing
 * HTML
-    * No unexpected errors were returned when  running the HTML code through the [official W3C validator](https://validator.w3.org/).
+    * No unexpected errors were returned when running the HTML code through the [official W3C validator](https://validator.w3.org/).
     * The only errors that were returned were due to the django framework integrated into the HTML code.
-    * For example, <code>article_detail.html</code> extends <code>base.html</code> and therefore did not need DOCTYPE, html, head, meta, or body tags as these
-are defined in the base template.
+    * For example, <code>article_detail.html</code> extends <code>base.html</code> and therefore did not need DOCTYPE, html, head, meta, or body tags as these are defined in the base template.
     * Additionally, the {} syntax was not recognised as valid agruments and therefore returned as bad values, where in production they provided the correct values.
 * CSS
     * No errors were found when running the CSS code through the [official W3C Jigsaw validator](https://jigsaw.w3.org/css-validator/)
 * JavaScript
     * No errors were found when running the JavaScript code through the [JSHint validator](https://jshint.com/).
 * Python
-    * No errors were found when running the Python code through the [PEP8 online validator](http://pep8online.com/).
+    * No unexpected errors were returned when running the Python code through the [CI Python Linter](https://pep8ci.herokuapp.com/#).
+    * In <code>blog/views.py</code> and <code>blog/test_views.py</code>, there were several warning stating that variables were <code>assigned to but never used</code>. However, these variables were used and referenced by the Django framework and the functions would fail in the absence of these variables. 
 * Accessibility
     * A high level of accessibility was returned when Lighthouse was ran in Google Chrome developer tools
 

@@ -137,7 +137,8 @@ class ArticleAdd(View):
             queryset = full_queryset.filter(approved=True,
                                             country__country_name=country_name)
             article_queryset = get_list_or_404(queryset)
-            return HttpResponseRedirect(reverse('country_articles', args=[country_name]))
+            return HttpResponseRedirect(reverse('country_articles',
+                                                args=[country_name]))
         context = {"form": form}
         return render(request, "add_article.html", context)
 
@@ -182,7 +183,8 @@ class ArticleEdit(View):
             queryset = full_queryset.filter(approved=True,
                                             country__country_name=country_name)
             article_queryset = get_list_or_404(queryset)
-            return HttpResponseRedirect(reverse('country_articles', args=[country_name]))
+            return HttpResponseRedirect(reverse('country_articles',
+                                                args=[country_name]))
         context = {
             "form": form,
             "article": article,
@@ -204,7 +206,8 @@ class ArticleDelete(View):
         country = get_object_or_404(Country, country_name=country_name)
         articles = list(Article.objects.all())
         article.delete()
-        return HttpResponseRedirect(reverse('country_articles', args=[country_name]))
+        return HttpResponseRedirect(reverse('country_articles',
+                                            args=[country_name]))
 
 
 class ArticleUpvote(View):
