@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-12 mt-3 left">
             <div class="row">
-            {% for country in countries %}
+                {% for country in countries %}
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <!-- Country content -->
@@ -31,18 +31,20 @@
                             <a href="{% url 'country_articles' country.country_name %}">
                                 <h5 class="card-title text-center">{{ country.country_name }}</h5>
                                 {% if user.is_superuser %}
-                                <a class="btn btn-info" href="{% url 'edit_country' country.country_name %}">Edit Country</a>
-                                <a class="btn btn-danger float-right" href="{% url 'delete_country' country.country_name %}">Delete Country</a>
+                                <a class="btn btn-info" href="{% url 'edit_country' country.country_name %}">Edit
+                                    Country</a>
+                                <a class="btn btn-danger float-right"
+                                    href="{% url 'delete_country' country.country_name %}">Delete Country</a>
                                 {% endif %}
                             </a>
                         </div>
                     </div>
                 </div>
-            {% if forloop.counter|divisibleby:3 %}
+                {% if forloop.counter|divisibleby:3 %}
             </div>
             <div class="row">
-            {% endif %}
-            {% endfor %}
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -58,9 +60,7 @@
         </ul>
     </nav>
     {% endif %}
-    </div>
-        <div class="text-center my-5">
-        <h1 class="fw-bolder">{{ country_name }}</h1>
+    <div class="text-center my-5">
         {% if user.is_authenticated %}
         <a class="btn btn-success" href="{% url 'add_country' %}">Add Country</a>
         {% endif %}

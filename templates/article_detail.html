@@ -8,7 +8,7 @@
 <div id="article-hero" style="background-image: url('{{ article.image.url }}');" class="container-fluid hero-container">
     <div class="hero-overlay"> </div>
     <div class="hero-footer h1 text-center text-light">
-        <h1>{{ article.attraction }}</h1>
+        <h2>{{ article.attraction }}</h2>
         <i class="fas fa-angle-down"></i>
     </div>
 </div>
@@ -26,10 +26,10 @@
                     <div class="text-muted fst-italic mb-2 text-center">Posted on {{ article.created_date|date:"j F, Y, g:i a" }} by {{ article.author }}</div>
                     <hr>
                 </header>
-                <section class="mb-3">
+                <div class="mb-3">
                     <!-- Article body -->
                     <p>{{ article.content | safe }}</p>
-                </section>
+                </div>
             </article>
         </div>
     </div>
@@ -115,7 +115,6 @@
                 </div>
             </div>
         </div>
-        
-        {% endblock %}
     </div>
 </div>
+{% endblock %}

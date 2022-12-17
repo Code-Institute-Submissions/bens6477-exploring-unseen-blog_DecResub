@@ -144,7 +144,11 @@ Automated tests were ran using the following command: <code>python3 manage.py te
 
 ### Validator Testing
 * HTML
-    * No errors were found when running the HTML code through the [official W3C validator](https://validator.w3.org/)
+    * No unexpected errors were returned when  running the HTML code through the [official W3C validator](https://validator.w3.org/).
+    * The only errors that were returned were due to the django framework integrated into the HTML code.
+    * For example, <code>article_detail.html</code> extends <code>base.html</code> and therefore did not need DOCTYPE, html, head, meta, or body tags as these
+are defined in the base template.
+    * Additionally, the {} syntax was not recognised as valid agruments and therefore returned as bad values, where in production they provided the correct values.
 * CSS
     * No errors were found when running the CSS code through the [official W3C Jigsaw validator](https://jigsaw.w3.org/css-validator/)
 * JavaScript
