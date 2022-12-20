@@ -1,3 +1,5 @@
+console.log('loaded listeners');
+
 // Run event listeners upon loading page
 document.addEventListener("DOMContentLoaded", function() {
     // Assigning hero image depending on page
@@ -22,4 +24,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 break;
         }
     }
+
 });
+
+// Scroll to heading on click of hero footer
+$('.hero-footer').click(function(e) {
+    $('.hero-footer')[0].scrollIntoView({behavior: "smooth"});
+})
