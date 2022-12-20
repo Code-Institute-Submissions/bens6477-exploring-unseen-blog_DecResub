@@ -241,8 +241,9 @@ This app was created using the [python essentials template](https://github.com/C
 * [Linear gradient background](https://codepen.io/kaustavbanerjee/pen/JKZPve)
 
 ### Articles
-* [The Gorges of the Ardèche](https://www.avignon-et-provence.com/en/natural-sites/gorges-ardeche)
-* [Fairy Pools](https://www.dunvegancastle.com/fairy-pools/)
-* [Stonehenge](https://www.nationalgeographic.com/history/article/stonehenge-1)
-* [Alhambra](https://www.alhambra.org/en/alhambra-history.html)
+* All article content and images were taken from the following websites:
+    * [Visit Scotland](https://www.visitscotland.com)
+    * [Timeout](https://www.timeout.com)
+    * [Trip Advisor](https://www.tripadvisor.co.uk)
+    * [Viator](https://www.viator.com)
 
