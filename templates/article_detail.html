@@ -33,12 +33,15 @@
             </article>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-10 mx-auto mb-5">
+    <hr>
+    <div class="row text-center">
+        <!-- Comments -->
+        <div class="col-lg-10 mx-auto">
+            <h2>Have your say...</h2>
             <!-- Voting -->
-            <!-- Upvote -->
             <div class="row">
-                <div class="col-12 text-center">
+                <div class="col-12">
+                    <!-- Upvote -->
                     {% if user.is_authenticated %}
                     <form action="{% url 'article_upvote' article.slug %}" method="post">
                         {% csrf_token %}
@@ -51,17 +54,9 @@
                     {% else %}
                     <span class="btn-vote"><i class="fas fa-chevron-up"></i></span>
                     {% endif %}
-                </div>
-            </div>
-            <!-- User votes -->
-            <div class="row">
-                <div class="col-12 text-center">
+                    <!-- User votes -->
                     <h3 id="vote-count"><strong>{{ article.vote_count }}</strong></h3>
-                </div>
-            </div>
-            <!-- Downvote -->
-            <div class="row">
-                <div class="col-12 text-center">
+                    <!-- Downvote -->
                     {% if user.is_authenticated %}
                     <form action="{% url 'article_downvote' article.slug %}" method="post">
                         {% csrf_token %}
@@ -75,15 +70,33 @@
                     <span class="btn-vote"><i class="fas fa-chevron-down"></i></span>
                     {% endif %}
                 </div>
+                <div class="col-12 my-4">
+                    <!-- Writing new user comment -->
+                    {% if commented %}
+                    <div class="mt-3 mb-3" role="alert">
+                        Your comment is awaiting approval.
+                    </div>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <h3>Leave a comment</h3>
+                    <form method="post">
+                        <div id="div_id_body" class="control-group mt-4">
+                            <div class="controls">
+                                <textarea name="body" cols="40" rows="3" class="textarea" required id="id_body" placeholder="Write your comment here"></textarea>
+                            </div>
+                        </div>
+                        {% csrf_token %}
+                        <button class="btn btn-primary content-width mx-auto my-3" type="submit">Post Comment</button>
+                    </form>
+                    {% endif %}
+                    <hr>
+                </div>
             </div>
-        </div>
-        
-        <!-- Comments -->
-        <div class="container">
             <!-- Display approved comments -->
-            <div class="row">
+            {% if comments %}
+            <h3>What others have to say</h3>
+            <div class="row my-2">
                 <div class="col-12">
-                    <h2>Comments</h2>
                     {% for comment in comments %}
                     <h4>{{ comment.user_name }}</h4>
                     <p>{{ comment.body }}</p>
@@ -91,29 +104,7 @@
                     <hr>
                 </div>
             </div>
-            <!-- Writing new user comment -->
-            <div class="row">
-                <div class="col-12">
-                    {% if commented %}
-                    <div class="mt-3 mb-3" role="alert">
-                        Your comment is awaiting approval.
-                    </div>
-                    {% else %}
-                        {% if user.is_authenticated %}
-                        <h3>Have your say...</h3>
-                        <form method="post">
-                            <div id="div_id_body" class="control-group mt-3">
-                                <div class="controls">
-                                    <textarea name="body" cols="40" rows="3" class="textarea" required id="id_body" placeholder="Write your comment here"></textarea>
-                                </div>
-                            </div>
-                            {% csrf_token %}
-                            <button class="btn btn-primary content-width mx-auto" type="submit">Post Comment</button>
-                        </form>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 </div>

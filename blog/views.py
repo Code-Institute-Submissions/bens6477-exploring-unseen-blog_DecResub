@@ -73,6 +73,11 @@ class ArticleDetail(View):
             comment = comment_form.save(commit=False)
             comment.article = article
             comment.save()
+            messages.add_message(
+                request,
+                messages.INFO,
+                "Your comment is awaiting approval.",
+            )
         else:
             comment_form = CommentForm()
 
@@ -131,7 +136,7 @@ class ArticleAdd(View):
             form.instance.slug = form.instance.title.replace(" ", "-").lower()
             form.save()
             messages.add_message(
-                request, messages.INFO, "Your article is awaiting approval"
+                request, messages.INFO, "Your article is awaiting approval."
             )
             full_queryset = Article.objects.all()
             queryset = full_queryset.filter(approved=True,
@@ -203,9 +208,15 @@ class ArticleDelete(View):
         """
         article = get_object_or_404(Article, slug=slug)
         country_name = article.country
+        attraction = article.attraction
         country = get_object_or_404(Country, country_name=country_name)
         articles = list(Article.objects.all())
         article.delete()
+        messages.add_message(
+            request,
+            messages.ERROR,
+            f"The article about {attraction} has been deleted.",
+        )
         return HttpResponseRedirect(reverse('country_articles',
                                             args=[country_name]))
 
@@ -221,8 +232,18 @@ class ArticleUpvote(View):
         article = get_object_or_404(Article, slug=slug)
         if article.upvotes.filter(id=request.user.id).exists():
             article.upvotes.remove(request.user)
+            messages.add_message(
+                request,
+                messages.INFO,
+                "Your upvote has been removed.",
+            )
         else:
             article.upvotes.add(request.user)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "You have upvoted this article.",
+            )
             if article.downvotes.filter(id=request.user.id).exists():
                 article.downvotes.remove(request.user)
 
@@ -240,8 +261,18 @@ class ArticleDownvote(View):
         article = get_object_or_404(Article, slug=slug)
         if article.downvotes.filter(id=request.user.id).exists():
             article.downvotes.remove(request.user)
+            messages.add_message(
+                request,
+                messages.INFO,
+                "Your downvote has been removed.",
+            )
         else:
             article.downvotes.add(request.user)
+            messages.add_message(
+                request,
+                messages.INFO,
+                "You have downvoted this article.",
+            )
             if article.upvotes.filter(id=request.user.id).exists():
                 article.upvotes.remove(request.user)
 
@@ -379,4 +410,9 @@ class CountryDelete(View):
         """
         country = get_object_or_404(Country, country_name=country_name)
         country.delete()
+        messages.add_message(
+            request,
+            messages.ERROR,
+            f"The country category of {country_name} has been deleted.",
+        )
         return redirect('countries')
