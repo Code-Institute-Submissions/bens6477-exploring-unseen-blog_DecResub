@@ -71,7 +71,12 @@
     </nav>
     {% endif %}
     <div class="text-center my-5">
-        <h3 class="fw-bolder">{{ country_name }}</h3>
+        {% if not articles %}
+        <p><strong>Stay tuned for new articles coming soon...</strong></p>
+        {% endif %}
+    </div>
+    <div class="text-center my-5">
+
         {% if user.is_authenticated %}
         <a class="btn btn-success" href="{% url 'add_article' country_name %}">Add Article</a>
         {% endif %}

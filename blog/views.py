@@ -314,7 +314,14 @@ class CountryArticles(View):
                 }
             )
         else:
-            return HttpResponseRedirect(reverse('countries'))
+            return render(
+                request,
+                "country_articles.html",
+                {
+                    "country_name": country_name
+                }
+            )
+            # return HttpResponseRedirect(reverse('countries'))
 
 
 class CountryAdd(View):
